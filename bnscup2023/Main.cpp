@@ -40,7 +40,7 @@ void Main()
 			isJump = true;
 		}
 		if (KeySpace.pressed() && isJump) {
-			vy -=100.0f;
+			vy -= 100.0f;
 			isJump = false;
 		}
 
@@ -49,10 +49,14 @@ void Main()
 
 		field.draw();
 		player.draw(Palette::Skyblue);
-		Print<< vy;
+		Print << vy;
 
 	}
 }
 //適当なコメント
 //くぁｗせつｊぉｐ；＠：「
+
 //git難しいンゴ～～！
+
+//肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが
+
