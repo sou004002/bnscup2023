@@ -66,4 +66,4 @@ void Main()
 //ふ～ん、fetchじゃんけんぽん
 //ソラマメ
 
-// 
+//もうconflictしない
