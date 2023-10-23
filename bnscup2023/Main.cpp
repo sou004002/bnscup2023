@@ -8,6 +8,7 @@ void Main()
 	bool isJump = false;
 	while (System::Update())
 	{
+		ClearPrint();
 		const double delta = (Scene::DeltaTime() * 200);
 		if (!isJump) {
 			t += Scene::DeltaTime();
@@ -52,3 +53,4 @@ void Main()
 
 	}
 }
+//適当なコメント
