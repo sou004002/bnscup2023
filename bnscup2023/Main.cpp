@@ -1,7 +1,6 @@
 ﻿# include "Mousecursor.h"
 #include "Food.h"
 #include <Siv3D.hpp>
-#include <Garbage.hpp>
 void Main()
 {
 	Mousecursor cursor(200, 300);
@@ -33,7 +32,7 @@ void Main()
 			if (i.trash_time >= 100) {
 				//ゴミに変換
 				//x座標は何らかの方法で保持
-				Garbage gm(s, t, z);//これを配列に加える。
+				//Garbage gm(s, t, z);//これを配列に加える。
 			}
 		}
 		cursor.move();
