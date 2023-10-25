@@ -22,3 +22,8 @@ void Mousecursor::move() {
 void Mousecursor::draw() const {
 	texture.scaled(0.3).drawAt(x, y);
 }
+
+Food Mousecursor::generate(float x) {
+	Food food(x);
+	return food;
+}

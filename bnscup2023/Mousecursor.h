@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Food.h"
 #include <Siv3D.hpp>
 class Mousecursor
 {
@@ -20,5 +21,6 @@ public:
 	bool gomi;
 	void move();
 	void draw() const;
+	Food generate(float x);
 };
 

@@ -1,9 +1,11 @@
 ﻿# include "Mousecursor.h"
+#include "Food.h"
 #include <Siv3D.hpp>
 void Main()
 {
 	Mousecursor cursor(200, 300);
-	while (System::Update())//どう？
+	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
+	while (System::Update())
 	{
 		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
 		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
@@ -19,6 +21,15 @@ void Main()
 			cursor.gomi = true;
 		}
 		ClearPrint();
+		if (MouseL.down()) {
+			if (cursor.esa && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {
+				arrayFood.push_back(cursor.generate(Cursor::Pos().x)); //ここで配列にこれを追加したい
+			}
+		}
+		for (Food& i : arrayFood) {//全ての餌を処理する。
+			i.move();
+			i.draw();
+		}
 		cursor.move();
 		cursor.draw();
 	}
