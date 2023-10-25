@@ -5,7 +5,7 @@ double interval = 1.0;
 
 void Fish::move()
 {
-	const RectF tank{ 20, 20 ,760, 460 };
+	const RectF tank{ 20, 20 ,760, 560 };
 
 	this->m_time += Scene::DeltaTime();
 	if (interval <= this->m_time)

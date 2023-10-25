@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fish.cpp" />
+    <ClCompile Include="Garbage.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -317,6 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fish.hpp" />
+    <ClInclude Include="Garbage.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
