@@ -1,70 +1,24 @@
-﻿# include <Siv3D.hpp>
-
+﻿# include "Mousecursor.cpp"
 void Main()
 {
-	Vec2 pos = { Scene::Center().x,200 };
-	float g = 9.81f;
-	float t = 0.0f;
-	bool isJump = false;
-	while (System::Update())
+	Mousecursor cursor(200, 300);
+	while (System::Update())//どう？
 	{
+		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
+		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
+		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
+		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
+			cursor.texture = cursor.otete;
+			cursor.esa = true;
+			cursor.gomi = false;
+		}
+		if (SimpleGUI::Button(U"ゴミを片付ける", Vec2{ 30, 450 })) {
+			cursor.texture = cursor.ami;
+			cursor.esa = false;
+			cursor.gomi = true;
+		}
 		ClearPrint();
-		const double delta = (Scene::DeltaTime() * 200);
-		if (!isJump) {
-			t += Scene::DeltaTime();
-		}
-
-		Rect field{ 0,500,800,100 };
-		Circle player{ pos, 20 };
-
-		// 上下左右キーで移動
-		if (KeyLeft.pressed())
-		{
-			pos.x -= delta;
-		}
-
-		if (KeyRight.pressed())
-		{
-			pos.x += delta;
-		}
-
-		// [C] キーが押されたら中央に戻る
-		if (KeyC.down())
-		{
-			pos = Scene::Center();
-		}
-		float vy = (float)t * g;
-		if (player.intersects(field)) {
-			t = 0.0f;
-			vy = 0.0f;
-			isJump = true;
-		}
-		if (KeySpace.pressed() && isJump) {
-			vy -= 100.0f;
-			isJump = false;
-		}
-
-
-		pos.y += vy;
-
-		field.draw();
-		player.draw(Palette::Skyblue);
-		Print << vy;
-
+		cursor.move();
+		cursor.draw();
 	}
 }
-//適当なコメント
-//くぁｗせつｊぉｐ；＠：「
-
-//git難しいンゴ～～！
-
-//肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが
-
-//枝豆おいしい
-
-
-//ふ～ん、fetchじゃんけんぽん
-//ソラマメ
-
-//もうconflictしない
-//くぁｗせｄｒｆｔｇｙふじこｌ
