@@ -1,5 +1,4 @@
-﻿#include <Siv3D.hpp>
-#include "Fish.hpp"
+﻿# include <Siv3D.hpp>
 
 void Main()
 {
@@ -7,10 +6,6 @@ void Main()
 	float g = 9.81f;
 	float t = 0.0f;
 	bool isJump = false;
-
-	const Texture emoji{ U"🐟"_emoji };
-	Fish fish(200, 300, 50, emoji);
-
 	while (System::Update())
 	{
 		ClearPrint();
@@ -21,7 +16,6 @@ void Main()
 
 		Rect field{ 0,500,800,100 };
 		Circle player{ pos, 20 };
-
 
 		// 上下左右キーで移動
 		if (KeyLeft.pressed())
@@ -53,12 +47,24 @@ void Main()
 
 		pos.y += vy;
 
-		fish.move();
-
 		field.draw();
 		player.draw(Palette::Skyblue);
-		fish.draw();
 		Print << vy;
 
 	}
 }
+//適当なコメント
+//くぁｗせつｊぉｐ；＠：「
+
+//git難しいンゴ～～！
+
+//肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが肉じゃが
+
+//枝豆おいしい
+
+
+//ふ～ん、fetchじゃんけんぽん
+//ソラマメ
+
+//もうconflictしない
+//くぁｗせｄｒｆｔｇｙふじこｌ
