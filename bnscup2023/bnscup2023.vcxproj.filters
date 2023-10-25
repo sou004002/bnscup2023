@@ -147,6 +147,9 @@
     <ClCompile Include="Food.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mousecursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -780,6 +783,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Food.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mousecursor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
