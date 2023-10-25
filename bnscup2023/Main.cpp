@@ -41,14 +41,21 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		const double delta = (Scene::DeltaTime() * 200);
 
 		Rect field{ 0,500,800,100 };
 
-
+		accumulator += Scene::DeltaTime();
+		for (auto& gab : garbages)
+		{
+			gab.changehitter(accumulator);
+			if (gab.gethitter() == true)
+			{
+				gab.changepos();
+				gab.draw();
+			}
+		}
 
 		fish.move();
 		fish.draw();
-
 	}
 }
