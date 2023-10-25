@@ -1,7 +1,12 @@
 ﻿# include <Siv3D.hpp>
 
+
+void spriteTest() {
+	TextureAsset(U"bg").draw();
+}
 void Main()
 {
+	TextureAsset::Register(U"bg", U"example/windmill.png");
 	Vec2 pos = { Scene::Center().x,200 };
 	float g = 9.81f;
 	float t = 0.0f;
@@ -9,6 +14,7 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
+		spriteTest();
 		const double delta = (Scene::DeltaTime() * 200);
 		if (!isJump) {
 			t += Scene::DeltaTime();
