@@ -14,9 +14,6 @@ void Food::move(){
 	if (graund) {
 		trash_time += Scene::DeltaTime();
 	}
-	if (trash_time >= 100) {
-		//この餌の座標からゴミを生成。餌をdelete
-	}
 }
 
 void Food::draw() const {
