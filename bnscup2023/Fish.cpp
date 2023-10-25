@@ -5,7 +5,7 @@ double interval = 1.0;
 
 void Fish::move()
 {
-	const RectF tank{ 20, 20 ,760, 460 };
+	const RectF tank{ 20, 20 ,760, 560 };
 
 	this->m_time += Scene::DeltaTime();
 	if (interval <= this->m_time)
@@ -20,6 +20,6 @@ void Fish::move()
 
 void Fish::draw() const
 {
-	this->m_texture.mirrored(0 < this->m_v.x)
+	this->m_texture.mirrored(this->m_v.x < 0)
 		.resized(this->m_s).drawAt(this->m_p);
 }

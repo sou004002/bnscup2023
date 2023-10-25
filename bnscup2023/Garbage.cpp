@@ -31,3 +31,25 @@ bool Garbage::gethitter() const
 	judge = this->g_hit;
 	return judge;
 }
+
+Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, int32 size, Texture tex, bool clip)
+{
+	Array<Garbage> garbage;
+	PoissonDisk2D pd{ rect.size, radius };
+	double time = 0.0;
+
+	for (const auto& point : pd.getPoints())
+	{
+		Vec2 pos = (point + rect.pos);
+		Garbage gab(size, tex, time);
+		if (clip && (not rect.contains(pos)))
+		{
+			continue;
+		}
+		gab.putpoints(pos);
+		garbage << gab;
+		time = time + 3.0;
+	}
+
+	return garbage;
+}
