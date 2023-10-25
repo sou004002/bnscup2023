@@ -5,7 +5,8 @@ void Main()
 {
 
 	const Texture emoji{ U"🐟"_emoji };
-	Fish fish(200, 300, 50, emoji);
+	const Texture texture{ U"pixel ocean\\peixinhos1.png" };
+	Fish fish(200, 300, 70, texture);
 
 	while (System::Update())
 	{
@@ -15,9 +16,6 @@ void Main()
 		Rect field{ 0,500,800,100 };
 
 		fish.move();
-
 		fish.draw();
-
-
 	}
 }

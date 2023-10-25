@@ -20,6 +20,6 @@ void Fish::move()
 
 void Fish::draw() const
 {
-	this->m_texture.mirrored(0 < this->m_v.x)
+	this->m_texture.mirrored(this->m_v.x < 0)
 		.resized(this->m_s).drawAt(this->m_p);
 }
