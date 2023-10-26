@@ -9,7 +9,7 @@ void Main()
 	Fish fish(200, 300, 100, texture,2);
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
-	const Texture gomi{ U"dotImages/garbage.svg" };
+	const Texture gomi{ U"🗑"_emoji };
 	double accumulator = 0.0;
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, gomi);
