@@ -3,7 +3,7 @@
 void Food::move(){
 	elapsedTime += Scene::DeltaTime();
 	if (!graund) {
-		x += Periodic::Sine1_1(1.5s);
+		x += Periodic::Sine1_1(2s, Scene::Time()+startTime);
 		if (elapsedTime >= 0.5) {
 			if (RandomBool()) {
 				x += 1;
