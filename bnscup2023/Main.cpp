@@ -4,6 +4,8 @@
 #include "Mousecursor.h"
 #include "Food.h"
 
+
+
 void Main()
 {
 	const Texture emoji{ U"🐟"_emoji };
@@ -18,6 +20,12 @@ void Main()
 	
 	Mousecursor cursor(200, 300);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
+
+	constexpr Rect SceneRect{ 0, 0, 800, 600 };
+	const Texture gomi{ U"🗑"_emoji };
+	double accumulator = 0.0;
+
+	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, gomi);
 
 	while (System::Update())
 	{
@@ -34,6 +42,17 @@ void Main()
 			cursor.texture = cursor.net;
 			cursor.feed = false;
 			cursor.pickGarbage = true;
+		}
+
+		accumulator += Scene::DeltaTime();
+		for (auto& gab : garbages)
+		{
+			gab.changehitter(accumulator);
+			if (gab.gethitter() == true)
+			{
+				gab.changepos();
+				gab.draw();
+			}
 		}
 
 		accumulator += Scene::DeltaTime();
