@@ -21,12 +21,6 @@ void Main()
 	Mousecursor cursor(200, 300);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
 
-	constexpr Rect SceneRect{ 0, 0, 800, 600 };
-	const Texture gomi{ U"🗑"_emoji };
-	double accumulator = 0.0;
-
-	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, gomi);
-
 	while (System::Update())
 	{
 		ClearPrint();
@@ -84,9 +78,5 @@ void Main()
 		}
 		cursor.move();
 		cursor.draw();
-		}
-
-
-
 	}
 }

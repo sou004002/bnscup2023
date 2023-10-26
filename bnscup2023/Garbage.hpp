@@ -8,7 +8,6 @@ public:
 		g_p({ 0,0 }), g_s(s), g_texture(t), g_time(z), g_hit(false) {};
 
 	void draw() const;
-	void putpoints(Vec2 pos);
 	void changepos();
 	void changehitter(double t);
 	bool gethitter() const;
