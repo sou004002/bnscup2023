@@ -1,20 +1,20 @@
 ﻿#include "Mousecursor.h"
 
 void Mousecursor::move() {
-	if (esa) {
+	if (feed) {
 		x = Cursor::Pos().x;
 		if (x <= 300) x = 300;
 		if (x >= 700) x = 700;
 		y = 50;
 	}
-	else if (gomi) {
+	else if (pickGarbage) {
 		x = Cursor::Pos().x;
 		y = Cursor::Pos().y;
 		if (300 <= x && x <= 700 && 150 <= y && y <= 600) {
-			texture = ami;
+			texture = net;
 		}
 		else {
-			texture = yajirusi;
+			texture = allow;
 		}
 	}
 }

@@ -1,13 +1,23 @@
 ﻿#include "Food.h"
 
 void Food::move(){
-	if (RandomBool()) {
-		x += 1;
-	} else {
-		x -= 1;
+	elapsedTime += Scene::DeltaTime();
+	if (!graund) {
+		x += Periodic::Sine1_1(1.5s);
+		if (elapsedTime >= 0.5) {
+			if (RandomBool()) {
+				x += 1;
+			}
+			else {
+				x -= 1;
+			}
+			elapsedTime -= 0.5;
+		}
+		x = fmax(x, 305);
+		x = fmin(x, 695);
 	}
 	y = y + dy;
-	if (y >= 600) {
+	if (y >= 590) {
 		y = 590;
 		graund = true;
 	}

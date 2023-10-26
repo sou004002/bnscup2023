@@ -12,17 +12,17 @@ void Main()
 		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
-			cursor.esa = true;
-			cursor.gomi = false;
+			cursor.feed = true;
+			cursor.pickGarbage = false;
 		}
 		if (SimpleGUI::Button(U"ゴミを片付ける", Vec2{ 30, 450 })) {
-			cursor.texture = cursor.ami;
-			cursor.esa = false;
-			cursor.gomi = true;
+			cursor.texture = cursor.net;
+			cursor.feed = false;
+			cursor.pickGarbage = true;
 		}
 		ClearPrint();
 		if (MouseL.down()) {
-			if (cursor.esa && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {
+			if (cursor.feed && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {
 				arrayFood.push_back(cursor.generate(Cursor::Pos().x)); //ここで配列にこれを追加したい
 			}
 		}
