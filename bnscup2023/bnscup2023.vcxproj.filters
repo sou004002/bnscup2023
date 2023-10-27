@@ -153,6 +153,12 @@
     <ClCompile Include="Fish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Garbage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aquarium.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -792,6 +798,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fish.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Garbage.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aquarium.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
