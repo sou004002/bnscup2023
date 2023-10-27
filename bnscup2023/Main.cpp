@@ -4,7 +4,7 @@
 #include "Mousecursor.h"
 #include "Food.h"
 #include "Aquarium.hpp"
-
+#include "HPBar.cpp"
 
 
 void Main()
@@ -24,6 +24,10 @@ void Main()
 		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
+	const ColorF HPColor{ 0.8,0.2,0.2 };
+	const HPBar HPBar{ HPColor,400,400 };
+	constexpr Rect HPRect{ 10,10,100,10 };
+
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
 	double accumulator = 0.0;
@@ -37,7 +41,7 @@ void Main()
 	{
 		ClearPrint();
 		gv.init();
-
+		HPBar.draw(HPRect);
 		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
 		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
 		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
