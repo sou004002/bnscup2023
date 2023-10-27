@@ -51,3 +51,4 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 
 	return garbage;
 }
+
