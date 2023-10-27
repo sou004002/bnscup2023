@@ -115,6 +115,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aquarium.cpp" />
     <ClCompile Include="Fish.cpp" />
     <ClCompile Include="Garbage.cpp" />
     <ClCompile Include="Food.cpp" />
@@ -319,6 +320,7 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aquarium.hpp" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="Mousecursor.h" />
     <ClInclude Include="Fish.hpp" />
