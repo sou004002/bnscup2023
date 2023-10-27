@@ -10,8 +10,18 @@
 void Main()
 {
 	const Texture emoji{ U"🐟"_emoji };
-	const Texture texture{ U"dotImages\\peixinhos1.png" };
-	Fish fish(200, 300, 70, texture);
+	const Texture texture{ U"dotImages/whiteFish.svg" };
+	const Texture fBtn{ U"🍴"_emoji };
+	Fish fish(200, 300, 100, texture, 2);
+
+	//水槽の作成
+	const Texture backGround{ U"dotImages/bg.svg" };
+	const int32 aqua_frameThick = 5;
+	const int32 aqua_w = Scene::Width() - aqua_frameThick * 2;
+	const int32 aqua_h = 400;
+	const Vec2 aqua_pos = { Scene::Width() - (aqua_w + aqua_frameThick),
+		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
+	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
@@ -25,6 +35,8 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
+		gv.init();
+
 		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
 		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
 		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
@@ -50,19 +62,9 @@ void Main()
 			}
 		}
 
-		accumulator += Scene::DeltaTime();
-		for (auto& gab : garbages)
-		{
-			gab.changehitter(accumulator);
-			if (gab.gethitter() == true)
-			{
-				gab.changepos();
-				gab.draw();
-			}
-		}
-
 		fish.move();
 		fish.draw();
+
 		if (MouseL.down()) {
 			if (cursor.feed && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {
 				arrayFood.push_back(cursor.generate(Cursor::Pos().x)); //ここで配列にこれを追加したい
