@@ -1,25 +1,25 @@
 ﻿#include "Mousecursor.h"
 
 void Mousecursor::move(float min, float max , float maxY) {
-	if (feed) {
-		x = Cursor::Pos().x;
-		if (x <= min) x = min;
-		if (x >= max) x = max;
-		y = 50;//投下位置（y座標）
+	if (m_feed) {
+		m_x = Cursor::Pos().x;
+		if (m_x <= min) m_x = min;
+		if (m_x >= max) m_x = max;
+		m_y = 50;//投下位置（y座標）
 	}
-	else if (pickGarbage) {
-		x = Cursor::Pos().x;
-		y = Cursor::Pos().y;
-		if (min <= x && x <= max && 150 <= y && y <= maxY) {//ここの数字は水面の高さ
-			texture = net;
+	else if (m_pickGarbage) {
+		m_x = Cursor::Pos().x;
+		m_y = Cursor::Pos().y;
+		if (min <= m_x && m_x <= max && 150 <= m_y && m_y <= maxY) {//ここの数字は水面の高さ
+			m_image = m_net;
 		}
 		else {
-			texture = allow;
+			m_image = m_allow;
 		}
 	}
 }
 
 void Mousecursor::draw() const {
-	texture.scaled(0.3).drawAt(x, y);
+	m_image.scaled(0.3).drawAt(m_x, m_y);
 }
 

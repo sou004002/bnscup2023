@@ -36,14 +36,14 @@ void Main()
 		gv.init();
 
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
-			cursor.texture = cursor.otete;
-			cursor.feed = true;
-			cursor.pickGarbage = false;
+			cursor.m_image = cursor.m_otete;
+			cursor.m_feed = true;
+			cursor.m_pickGarbage = false;
 		}
 		if (SimpleGUI::Button(U"ゴミを片付ける", Vec2{ 30, 450 })) {
-			cursor.texture = cursor.net;
-			cursor.feed = false;
-			cursor.pickGarbage = true;
+			cursor.m_image = cursor.m_net;
+			cursor.m_feed = false;
+			cursor.m_pickGarbage = true;
 		}
 
 		accumulator += Scene::DeltaTime();
@@ -61,7 +61,7 @@ void Main()
 		fish.draw();
 
 		if (MouseL.down()) {
-			if (cursor.feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
+			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
 				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h)); //ここで配列にこれを追加したい
 			}
 		}
