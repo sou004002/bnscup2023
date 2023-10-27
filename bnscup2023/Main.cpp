@@ -4,7 +4,7 @@
 #include "Mousecursor.h"
 #include "Food.h"
 #include "Aquarium.hpp"
-#include "HPBar.cpp"
+#include "HPBar.hpp"
 
 
 void Main()
@@ -25,7 +25,7 @@ void Main()
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
 	const ColorF HPColor{ 0.8,0.2,0.2 };
-	const HPBar HPBar{ HPColor,400,400 };
+	const HPBar HPBar{ HPColor,400,300 };
 	constexpr Rect HPRect{ 10,10,100,10 };
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
