@@ -23,11 +23,15 @@ void Main()
 		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
-	constexpr Rect SceneRect{ 0, 0, 800, 600 };
+	//ごみの生成範囲
+	const int32 g_range_w = 800;
+	const int32 g_range_h = 600;
+	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 	const Texture gomi{ U"🗑"_emoji };
+	const Texture garb{ U"dotImages/Garbage.svg" };
 	double accumulator = 0.0;
 
-	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, gomi);
+	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
 
 	Mousecursor cursor(200, 300);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
@@ -57,7 +61,6 @@ void Main()
 			gab.changehitter(accumulator);
 			if (gab.gethitter() == true)
 			{
-				gab.changepos();
 				gab.draw();
 			}
 		}
