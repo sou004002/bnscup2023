@@ -12,7 +12,8 @@ void Main()
 	const Texture emoji{ U"🐟"_emoji };
 	const Texture texture{ U"dotImages/whiteFish.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
-	Fish fish(200, 300, 100, texture, 2);
+	Fish fish(200,300,100,texture,2);
+
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
