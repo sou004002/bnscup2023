@@ -3,6 +3,7 @@
 #include "Garbage.hpp"
 #include "Mousecursor.h"
 #include "Food.h"
+#include "Aquarium.hpp"
 
 
 
@@ -17,7 +18,7 @@ void Main()
 	double accumulator = 0.0;
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, gomi);
-	
+
 	Mousecursor cursor(200, 300);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
 

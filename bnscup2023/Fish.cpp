@@ -20,6 +20,8 @@ void Fish::move()
 
 void Fish::draw() const
 {
-	this->m_texture.mirrored(this->m_v.x < 0)
+	const uint64 t = Time::GetMillisec();
+	const int32 x = (t / 250 % m_animCnt);
+	this->m_texture(x * (m_texture.width() / m_animCnt), 0, m_texture.width() / m_animCnt, m_texture.height()).mirrored(0 < this->m_v.x)
 		.resized(this->m_s).drawAt(this->m_p);
 }
