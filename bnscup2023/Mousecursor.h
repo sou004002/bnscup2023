@@ -14,13 +14,12 @@ public:
 	float x;
 	float y;
 	Texture texture;
-	Texture otete{ U"🍬"_emoji };
-	Texture net{ U"🍟"_emoji };
-	Texture allow{ U"🥐"_emoji };
+	Texture otete{ U"🤏"_emoji };
+	Texture net{ U"dotImages/ami.svg" };
+	Texture allow{ U"🔎"_emoji };
 	bool feed;
 	bool pickGarbage;
-	void move();
+	void move(float min, float max, float maxY);
 	void draw() const;
-	Food generate(float x);
 };
 

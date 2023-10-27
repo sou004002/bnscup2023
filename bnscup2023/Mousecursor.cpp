@@ -1,16 +1,16 @@
 ﻿#include "Mousecursor.h"
 
-void Mousecursor::move() {
+void Mousecursor::move(float min, float max , float maxY) {
 	if (feed) {
 		x = Cursor::Pos().x;
-		if (x <= 300) x = 300;
-		if (x >= 700) x = 700;
-		y = 50;
+		if (x <= min) x = min;
+		if (x >= max) x = max;
+		y = 50;//投下位置（y座標）
 	}
 	else if (pickGarbage) {
 		x = Cursor::Pos().x;
 		y = Cursor::Pos().y;
-		if (300 <= x && x <= 700 && 150 <= y && y <= 600) {
+		if (min <= x && x <= max && 150 <= y && y <= maxY) {//ここの数字は水面の高さ
 			texture = net;
 		}
 		else {
@@ -23,7 +23,3 @@ void Mousecursor::draw() const {
 	texture.scaled(0.3).drawAt(x, y);
 }
 
-Food Mousecursor::generate(float x) {
-	Food food(x);
-	return food;
-}
