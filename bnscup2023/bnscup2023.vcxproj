@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fish.cpp" />
+    <ClCompile Include="Aquarium.cpp" />
     <ClCompile Include="Garbage.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -318,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fish.hpp" />
+    <ClInclude Include="Aquarium.hpp" />
     <ClInclude Include="Garbage.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
