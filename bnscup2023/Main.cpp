@@ -9,8 +9,11 @@
 
 void Main()
 {
-	const Texture texture{ U"dotImages/whiteFish.svg" };
-	Fish fish(200, 300, 100, texture, 2);
+	const Texture emoji{ U"🐟"_emoji };
+	const Image image{ U"dotImages/whiteFish.svg" };
+	const Texture fBtn{ U"🍴"_emoji };
+	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
+	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -57,8 +60,21 @@ void Main()
 			}
 		}
 
-		fish.move();
-		fish.draw();
+		fish1.move();
+		fish2.move();
+		fish1.draw();
+		fish2.draw();
+
+		String st;
+		if (fish1.isCollision(fish2))
+		{
+			st = U"こりじょん！！";
+		}
+		else
+		{
+			st = U"のっとこりじょん！！";
+		}
+		Print << st;
 
 		if (MouseL.down()) {
 			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
