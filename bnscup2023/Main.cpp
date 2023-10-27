@@ -9,11 +9,6 @@
 
 void Main()
 {
-	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/whiteFish.svg" };
-	const Texture fBtn{ U"🍴"_emoji };
-	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
-	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -23,6 +18,12 @@ void Main()
 	const Vec2 aqua_pos = { Scene::Width() - (aqua_w + aqua_frameThick),
 		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
+
+	const Texture emoji{ U"🐟"_emoji };
+	const Image image{ U"dotImages/whiteFish.svg" };
+	const Texture fBtn{ U"🍴"_emoji };
+	Fish fish1(200, 300, 100.0, image, 2, gv);
+	Fish fish2(200, 300, 300.0, image, 2, gv);
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };

@@ -5,7 +5,11 @@ double interval = 1.0;
 
 void Fish::move()
 {
-	const RectF tank{ 20, 20 ,760, 560 };
+	const RectF tank = m_aquarium._frame.stretched(-m_width / 8, -m_height / 4)
+		.movedBy(-m_width / 8, -m_height / 4).scaled(0.9);
+	tank.drawFrame(2, 2, Palette::Orange);
+	Print << m_width << U", " << m_height;
+	Circle{ m_point,10 }.draw(Palette::Forestgreen);
 
 	m_time += Scene::DeltaTime();
 	if (interval <= m_time)
@@ -15,6 +19,20 @@ void Fish::move()
 		interval = Random(0.3, 7.0);
 	}
 	m_point = Math::SmoothDamp(m_point, m_to, m_v, 1.0);
+}
+
+bool Fish::isCollision(const CollisionImage& ci) const
+{
+	//　当たり判定がどこにあるか表示
+	m_polygon.scaled(m_scale).movedBy(m_point)
+		.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
+		.drawWireframe(2, Palette::Yellow);
+	ci.getPolygon().scaled(ci.getScale()).movedBy(ci.getPoint())
+		.draw(ColorF{ 0.0, 1.0, 1.0, 0.2 })
+		.drawWireframe(2, Palette::Red);
+
+	return m_polygon.scaled(m_scale).movedBy(m_point)
+		.intersects(ci.getPolygon().scaled(ci.getScale()).moveBy(ci.getPoint()));
 }
 
 void Fish::draw() const
