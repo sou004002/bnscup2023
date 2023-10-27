@@ -5,17 +5,21 @@
 class Mousecursor
 {
 public:
-	Mousecursor(float x, float y) {
-		m_x = x;
+	Mousecursor(float x, float y)
+		:m_x(x), m_y(y), m_feed(true), m_pickGarbage(false), m_otete((int32)m_x, (int32)m_y, 1.0, Image{ U"dotImages/cursor.svg" }),
+		m_net((int32)m_x, (int32)m_y, 0.2, Image{ U"dotImages/ami.svg" }),
+		m_allow((int32)m_x, (int32)m_y, 0.3, Image{ U"dotImages/tatsu.svg" }),
+		m_image((int32)m_x, (int32)m_y, 0.5, Image{ U"dotImages/turtle-s.svg" })
+	{
+		/*m_x = x;
 		m_y = y;
 		m_feed = true;
 		m_pickGarbage = false;
-		m_image= m_otete;
-		m_otete(m_x, m_y, size, Image{ U"dotImages/cursor.svg" });
-		m_net(m_x, m_y, size, Image{ U"dotImages/ami.svg" });
-		m_net(m_x, m_y, size, Image{ U"dotImages/tatsu.svg" });
-			//こんな感じで全部Collisionクラスに差し替える。
-	}
+		CollisionImage m_otete((int32)m_x, (int32)m_y, 1.0, Image{ U"dotImages/cursor.svg" });
+		CollisionImage m_net((int32)m_x, (int32)m_y, 1.0, Image{ U"dotImages/ami.svg" });
+		CollisionImage m_allow((int32)m_x, (int32)m_y, 1.0, Image{ U"dotImages/tatsu.svg" });
+		m_image = m_otete;*/
+	};
 	float m_x;
 	float m_y;
 	CollisionImage m_image;

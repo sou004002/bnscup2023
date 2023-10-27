@@ -20,6 +20,6 @@ void Mousecursor::move(float min, float max , float maxY) {
 }
 
 void Mousecursor::draw() const {
-	m_image.scaled(0.3).drawAt(m_x, m_y);
+	m_image.draw();
 }
 
