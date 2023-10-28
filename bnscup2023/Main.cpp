@@ -6,6 +6,7 @@
 #include "Aquarium.hpp"
 #include "HPBar.hpp"
 #include "LvIcon.hpp"
+#include "FoodBtn.hpp"
 
 void Main()
 {
@@ -30,7 +31,7 @@ void Main()
 	const int32 initialHP = 400;
 	const int32 HPBarPosX=200;
 	const int32 HPBarPosY = 30;
-	const int32 HPBarWidth = 500;
+	const int32 HPBarWidth = 470;
 	const int32 HPBarHeight=30;
 	HPBar hpBar{ HPColor,initialHP };
 	constexpr Rect HPRect{ HPBarPosX,HPBarPosY,HPBarWidth,HPBarHeight };
@@ -44,15 +45,19 @@ void Main()
 	const int32 initialLevel = 1;
 	LvIcon levelIcon{ levelIconPos,levelIconSize,initialLevel };
 
+
 	//EXPバー
 	const ColorF EXPColor{ 0, 0.851, 0.063 };
 	const int32 initialEXP = 0;
 	HPBar expBar{ EXPColor,initialEXP };
 	const int32 EXPBarPosX = 100;
 	const int32 EXPBarPosY = 30+HPBarPosY+HPBarHeight;
-	const int32 EXPBarWidth = 500+(HPBarPosX-EXPBarPosX);
+	const int32 EXPBarWidth = 470+(HPBarPosX-EXPBarPosX);
 	const int32 EXPBarHeight = 15;
 	constexpr Rect EXPRect{ EXPBarPosX,EXPBarPosY,EXPBarWidth,EXPBarHeight};
+
+	FoodBtn foodBtn{EXPBarPosX+EXPBarWidth+20,HPBarPosY-10,0.25};
+
 
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
@@ -74,6 +79,16 @@ void Main()
 		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
 		levelIcon.draw();
+		foodBtn.draw();
+		if (MouseR.pressed() && foodBtn.getEnabled()) {
+			foodBtn.click();
+			foodBtn.m_interval.start();
+		}
+		if (foodBtn.m_interval.reachedZero()) {
+			foodBtn.setEnabled();
+			foodBtn.m_interval.reset();
+
+		}
 		//if (MouseR.pressed()) {
 		//	hpBar.damage(10);
 		//	levelIcon.levelUp();
