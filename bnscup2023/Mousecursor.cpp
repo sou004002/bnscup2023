@@ -19,7 +19,8 @@ void Mousecursor::move(float min, float max , float maxY) {
 	}
 }
 
-void Mousecursor::draw() const {
+void Mousecursor::draw() {
+	m_image.setM_point(Vec2({ m_x, m_y }));
 	m_image.draw();
 }
 

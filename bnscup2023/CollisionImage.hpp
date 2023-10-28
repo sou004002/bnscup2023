@@ -17,7 +17,7 @@ public:
 	Vec2 getPoint() const { return m_point; }
 	double getScale() const { return m_scale; }
 	Polygon getPolygon() const { return m_polygon; }
-
+	void setM_point(Vec2 point) { m_point.x = point.x; m_point.y = point.y; }
 protected:
 	Vec2 m_point;
 	double m_scale;
