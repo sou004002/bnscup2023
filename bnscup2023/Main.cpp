@@ -11,6 +11,7 @@ void Main()
 {
 	const Texture emoji{ U"🐟"_emoji };
 	const Texture texture{ U"dotImages/whiteFish.svg" };
+	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish(200,300,100,texture,2);
 
@@ -25,8 +26,8 @@ void Main()
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
 	const ColorF HPColor{ 0.8,0.2,0.2 };
-	const HPBar HPBar{ HPColor,400,300 };
-	constexpr Rect HPRect{ 10,10,100,10 };
+	HPBar HPBar{ HPColor,400};
+	constexpr Rect HPRect{ 10,10,600,30 };
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
@@ -40,11 +41,14 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
+		blackBorder.scaled(0.5).draw();
+		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
 		gv.init();
 		HPBar.draw(HPRect);
-		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
-		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
-		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
+		if (MouseR.pressed()) {
+			HPBar.damage(10);
+			
+		}
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
 			cursor.feed = true;

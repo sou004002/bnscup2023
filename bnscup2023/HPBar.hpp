@@ -9,6 +9,8 @@ public:
 		m_frameThickness(frameThickness), m_maxHP(maxHP), m_currentHP(currentHP) {};
 	HPBar(ColorF hpColor,   int32 maxHP, int32 currentHP)
 		:m_hpColor(hpColor),m_maxHP(maxHP), m_currentHP(currentHP) {};
+	HPBar(ColorF hpColor, int32 maxHP)
+		:m_hpColor(hpColor), m_maxHP(maxHP), m_currentHP(maxHP) {};
 
 	void draw(const RectF& rect) const;
 	int32 getHP() const;

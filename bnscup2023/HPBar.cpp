@@ -4,7 +4,7 @@
 void HPBar::draw(const RectF& rect) const{
 	const RectF rectHP{ rect.pos, (rect.w * getHPRatio()), rect.h };
 	rect.draw(m_backgroundColor);
-	rectHP.draw(m_hpColor);
+	rectHP.rounded(40).draw(m_hpColor);
 	rect.drawFrame(m_frameThickness, m_frameColor);
 }
 
