@@ -25,7 +25,7 @@ private:
 	ColorF m_backgroundColor{ 0.2 };
 	ColorF m_hpColor;
 	ColorF m_frameColor{ 1.0 };
-	int32 m_frameThickness=8;
+	int32 m_frameThickness=5;
 	int32 m_maxHP = 1;
 	int32 m_currentHP = 1;
 	

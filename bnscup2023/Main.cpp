@@ -5,7 +5,7 @@
 #include "Food.h"
 #include "Aquarium.hpp"
 #include "HPBar.hpp"
-
+#include "LvIcon.hpp"
 
 void Main()
 {
@@ -25,9 +25,22 @@ void Main()
 		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 
+	//HPバー
 	const ColorF HPColor{ 0.8,0.2,0.2 };
-	HPBar HPBar{ HPColor,400};
-	constexpr Rect HPRect{ 50,30,600,30 };
+	const int32 initialHP = 400;
+	HPBar HPBar{ HPColor,initialHP};
+	const int32 HPBarPosX=200;
+	const int32 HPBarPosY = 30;
+	const int32 HPBarWidth = 500;
+	const int32 HPBarHeight=30;
+	constexpr Rect HPRect{ HPBarPosX,HPBarPosY,HPBarWidth,HPBarHeight };
+
+	//レベルアイコン
+	const Vec2 levelIconPos{ 10,10 };
+	const double levelIconSize = 0.3;
+	const int32 initialLevel = 1;
+	LvIcon levelIcon{ levelIconPos,levelIconSize,initialLevel };
+	
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
@@ -44,10 +57,11 @@ void Main()
 		blackBorder.scaled(0.5).draw();
 		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
 		gv.init();
+		levelIcon.draw();
 		HPBar.draw(HPRect);
 		if (MouseR.pressed()) {
 			HPBar.damage(10);
-			
+			levelIcon.levelUp();
 		}
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
