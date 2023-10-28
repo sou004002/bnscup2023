@@ -3,21 +3,18 @@
 
 void Garbage::draw() const
 {
-	this->g_texture.resized(this->g_s).drawAt(this->g_p);
+	//分割数
+	int32 div = 4;
+	int32 tex_w = g_texture.width() / div;
+	this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_s).drawAt(this->g_p);
 }
 
 void Garbage::putpoints(Vec2 pos)
 {
 	this->g_p = pos;
+	this->g_x = pos.x;
 }
-void Garbage::changepos()
-{
-	if (this->g_p.y < 500)
-	{
-		this->g_p.y = this->g_p.y + 1;
-	}
 
-}
 void Garbage::changehitter(double t)
 {
 	if (this->g_time <= t) {
@@ -40,8 +37,9 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 
 	for (const auto& point : pd.getPoints())
 	{
+		int32 place = Random(3);
 		Vec2 pos = (point + rect.pos);
-		Garbage gab(size, tex, time);
+		Garbage gab(size, tex, time, place);
 		if (clip && (not rect.contains(pos)))
 		{
 			continue;
@@ -53,3 +51,4 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 
 	return garbage;
 }
+
