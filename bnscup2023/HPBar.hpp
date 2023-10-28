@@ -12,7 +12,7 @@ public:
 	HPBar(ColorF hpColor, int32 maxHP)
 		:m_hpColor(hpColor), m_maxHP(maxHP), m_currentHP(maxHP) {};
 
-	void draw(const RectF& rect) const;
+	void draw(const Rect& rect) const;
 	int32 getHP() const;
 	int32 getMaxHP() const;
 	double getHPRatio() const;
@@ -22,10 +22,10 @@ public:
 
 
 private:
-	ColorF m_backgroundColor{ 0.6 };
+	ColorF m_backgroundColor{ 0.2 };
 	ColorF m_hpColor;
 	ColorF m_frameColor{ 1.0 };
-	double m_frameThickness=1.5;
+	int32 m_frameThickness=8;
 	int32 m_maxHP = 1;
 	int32 m_currentHP = 1;
 	

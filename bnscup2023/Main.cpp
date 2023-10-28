@@ -27,7 +27,7 @@ void Main()
 
 	const ColorF HPColor{ 0.8,0.2,0.2 };
 	HPBar HPBar{ HPColor,400};
-	constexpr Rect HPRect{ 10,10,600,30 };
+	constexpr Rect HPRect{ 50,30,600,30 };
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };

@@ -1,11 +1,17 @@
 ﻿#include "stdafx.h"
 #include "HPBar.hpp"
 
-void HPBar::draw(const RectF& rect) const{
+void HPBar::draw(const Rect& rect) const{
 	const RectF rectHP{ rect.pos, (rect.w * getHPRatio()), rect.h };
 	rect.draw(m_backgroundColor);
-	rectHP.rounded(40).draw(m_hpColor);
-	rect.drawFrame(m_frameThickness, m_frameColor);
+	rectHP.draw(m_hpColor);
+
+	//ドット絵風の枠を描く
+	Rect{rect.pos.x,rect.pos.y-m_frameThickness,rect.w,m_frameThickness}.draw();
+	Rect{ rect.pos.x,rect.pos.y+rect.h,rect.w,m_frameThickness }.draw();
+	Rect{ rect.pos.x-m_frameThickness,rect.pos.y,m_frameThickness,rect.h }.draw();
+	Rect{ rect.pos.x +rect.w,rect.pos.y,m_frameThickness,rect.h }.draw();
+
 }
 
 int32 HPBar::getHP() const {
