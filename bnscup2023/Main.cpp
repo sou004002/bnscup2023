@@ -28,19 +28,32 @@ void Main()
 	//HPバー
 	const ColorF HPColor{ 0.8,0.2,0.2 };
 	const int32 initialHP = 400;
-	HPBar HPBar{ HPColor,initialHP};
 	const int32 HPBarPosX=200;
 	const int32 HPBarPosY = 30;
 	const int32 HPBarWidth = 500;
 	const int32 HPBarHeight=30;
+	HPBar hpBar{ HPColor,initialHP };
 	constexpr Rect HPRect{ HPBarPosX,HPBarPosY,HPBarWidth,HPBarHeight };
+	Font font{ FontMethod::MSDF, 30 ,U"example/font/INVASION2000.TTF", FontStyle::Bitmap };
+
+
 
 	//レベルアイコン
 	const Vec2 levelIconPos{ 10,10 };
 	const double levelIconSize = 0.3;
 	const int32 initialLevel = 1;
 	LvIcon levelIcon{ levelIconPos,levelIconSize,initialLevel };
-	
+
+	//EXPバー
+	const ColorF EXPColor{ 0, 0.851, 0.063 };
+	const int32 initialEXP = 0;
+	HPBar expBar{ EXPColor,initialEXP };
+	const int32 EXPBarPosX = 100;
+	const int32 EXPBarPosY = 30+HPBarPosY+HPBarHeight;
+	const int32 EXPBarWidth = 500+(HPBarPosX-EXPBarPosX);
+	const int32 EXPBarHeight = 15;
+	constexpr Rect EXPRect{ EXPBarPosX,EXPBarPosY,EXPBarWidth,EXPBarHeight};
+
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
@@ -57,12 +70,14 @@ void Main()
 		blackBorder.scaled(0.5).draw();
 		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
 		gv.init();
+		hpBar.draw(HPRect);
+		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
+		expBar.draw(EXPRect);
 		levelIcon.draw();
-		HPBar.draw(HPRect);
-		if (MouseR.pressed()) {
-			HPBar.damage(10);
-			levelIcon.levelUp();
-		}
+		//if (MouseR.pressed()) {
+		//	hpBar.damage(10);
+		//	levelIcon.levelUp();
+		//}
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
 			cursor.feed = true;

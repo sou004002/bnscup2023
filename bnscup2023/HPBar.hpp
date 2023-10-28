@@ -4,6 +4,7 @@
 class HPBar
 {
 public:
+	int32 m_frameThickness = 5;
 	HPBar(ColorF bgColor, ColorF hpColor, ColorF frameColor, double frameThickness, int32 maxHP, int32 currentHP)
 		:m_backgroundColor(bgColor), m_hpColor(hpColor), m_frameColor(frameColor),
 		m_frameThickness(frameThickness), m_maxHP(maxHP), m_currentHP(currentHP) {};
@@ -25,7 +26,7 @@ private:
 	ColorF m_backgroundColor{ 0.2 };
 	ColorF m_hpColor;
 	ColorF m_frameColor{ 1.0 };
-	int32 m_frameThickness=5;
+
 	int32 m_maxHP = 1;
 	int32 m_currentHP = 1;
 	
