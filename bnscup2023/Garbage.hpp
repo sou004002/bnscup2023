@@ -13,10 +13,9 @@ public:
 	bool gethitter() const;
 	static Array<Garbage> GenerateRandomPoints(const Rect& rect,
 		double radius, int32 size, Texture tex, bool clip = false);
-
-private:
 	void putpoints(Vec2 pos);
 
+private:
 	Vec2 g_p;
 	int32 g_s;
 	Texture g_texture;

@@ -85,10 +85,16 @@ void Main()
 			i.move();
 			i.draw();
 			i.removal();
-			if (i.m_trashTime >= 100) {
-				//ゴミに変換
-				//x座標は何らかの方法で保持
-				//Garbage gm(s, t, z);//これを配列に加える。
+			if (i.m_trashTime >= 10) {
+				for (int32 i = 0; i < size(arrayFood); i++) {//全ての餌を処理する。
+					arrayFood[i].move();
+					arrayFood[i].draw();
+					if (arrayFood[i].m_trashTime >= 10) {//地面に落ちてからゴミと化すまでの時間
+						//garbages.push_back(Garbage(1, gomi, 0.0));
+						//garbages[-1].putpoints(Vec2{ arrayFood[i].m_x, arrayFood[i].m_y });
+						//要素どうやって消すの
+					}
+				}
 			}
 		}
 		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
