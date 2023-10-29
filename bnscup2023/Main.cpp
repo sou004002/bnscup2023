@@ -17,7 +17,7 @@ void Main()
 	const Image image{ U"dotImages/whiteFish.svg" };
 	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
 	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
-	Fish fish(200,300,100,texture,2);
+	//Fish fish(200,300,100,texture,2);
 
 
 	//水槽の作成
