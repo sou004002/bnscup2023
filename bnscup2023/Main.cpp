@@ -17,7 +17,7 @@ void Main()
 	const Image image{ U"dotImages/whiteFish.svg" };
 	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
 	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
-	Fish fish(200,300,100,texture,2);
+	//Fish fish(200,300,100,texture,2);
 
 
 	//水槽の作成
@@ -70,7 +70,7 @@ void Main()
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
 
 	Mousecursor cursor(200, 300);
-	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
+	Array<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
 
 	while (System::Update())
 	{
@@ -124,25 +124,18 @@ void Main()
 
 		if (MouseL.down()) {
 			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
-				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h)); //ここで配列にこれを追加したい
+				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h); //ここで配列にこれを追加したい
 			}
 		}
-		for (Food& i : arrayFood) {//全ての餌を処理する。
+		for (Food& i : arrayFood) {
 			i.move();
 			i.draw();
-			i.removal();
-			if (i.m_trashTime >= 10) {
-				for (int32 i = 0; i < size(arrayFood); i++) {//全ての餌を処理する。
-					arrayFood[i].move();
-					arrayFood[i].draw();
-					if (arrayFood[i].m_trashTime >= 10) {//地面に落ちてからゴミと化すまでの時間
-						//garbages.push_back(Garbage(1, gomi, 0.0));
-						//garbages[-1].putpoints(Vec2{ arrayFood[i].m_x, arrayFood[i].m_y });
-						//要素どうやって消すの
-					}
-				}
+			if (i.m_trashTime >= 1) {
+				garbages << Garbage(1, garb, 0.0, 0);
+				garbages[-1].putpoints(Vec2{ i.m_x, i.m_y });
 			}
 		}
+		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime > 1); });
 		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
 		cursor.draw();
 	}

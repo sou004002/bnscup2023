@@ -17,8 +17,9 @@ void Food::move(){
 		m_x = fmin(m_x, m_right - 5);
 	}
 	m_y = m_y + m_dy;
-	if (m_y >= m_maxY - 5) {//5はマージン
-		m_y = m_maxY - 5;
+	m_esaesa.setM_point(Vec2({ m_x, m_y }));
+	if (m_y >= m_maxY - 10) {//10はマージン
+		m_y = m_maxY - 10;
 		m_ground = true;
 	}
 	if (m_ground) {
@@ -26,11 +27,27 @@ void Food::move(){
 	}
 }
 
-void Food::removal()
+void Food::eaten(Fish fish)
 {
-	
+	if (m_esaesa.isCollision(fish)) {
+
+	}
+}
+
+Food& Food::operator=(const Food& food)
+{
+	m_x = food.m_x;
+	m_y = food.m_y;
+	m_ground = food.m_ground;
+	m_startTime = food.m_startTime;
+	m_trashTime = food.m_trashTime;
+	m_elapsedTime = food.m_elapsedTime;
+	m_maxY = food.m_maxY;
+	m_left = food.m_left;
+	m_right = food.m_right;
+	return *this;
 }
 
 void Food::draw() const {
-	m_texture.scaled(0.1).drawAt(m_x, m_y);
+	m_esaesa.draw();
 }
