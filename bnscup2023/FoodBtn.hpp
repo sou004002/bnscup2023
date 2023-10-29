@@ -11,15 +11,14 @@ public:
 	void draw();
 
 	Vec2 getPos();
-	bool click();
-	bool update();
+	bool getPressed();
+	void update();
 	
 
 private:
 	Vec2 m_p;
 	double m_s;
+	bool m_pressed;
 	Texture m_texture{ U"dotImages/foodBtn.svg" };
-	Rect m_rect{0,0,100,100};
-	Transition m_transitionPressed{ 1.0s,1.0s };
-	bool m_pressed = false;
+	Rect m_rect{(int32)m_p.x,(int32)m_p.y,(int32)(m_texture.width()*m_s)/2,(int32)(m_texture.height() * m_s)};
 };

@@ -60,6 +60,7 @@ void Main()
 
 
 
+
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
 	double accumulator = 0.0;
@@ -72,23 +73,16 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		/*blackBorder.scaled(0.5).draw();
-		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);*/
+		blackBorder.scaled(0.5).draw();
+		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
 		gv.init();
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
 		levelIcon.draw();
-
-		Print << foodBtn.click();
-	
-		
+		foodBtn.update();
 		foodBtn.draw();
 
-		//if (MouseR.pressed()) {
-		//	hpBar.damage(10);
-		//	levelIcon.levelUp();
-		//}
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
 			cursor.feed = true;
