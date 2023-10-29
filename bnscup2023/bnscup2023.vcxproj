@@ -117,8 +117,11 @@
   <ItemGroup>
     <ClCompile Include="Aquarium.cpp" />
     <ClCompile Include="Fish.cpp" />
+    <ClCompile Include="FoodBtn.cpp" />
     <ClCompile Include="Garbage.cpp" />
     <ClCompile Include="Food.cpp" />
+    <ClCompile Include="HPBar.cpp" />
+    <ClCompile Include="LvIcon.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mousecursor.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -322,6 +325,9 @@
   <ItemGroup>
     <ClInclude Include="Aquarium.hpp" />
     <ClInclude Include="Food.h" />
+    <ClInclude Include="FoodBtn.hpp" />
+    <ClInclude Include="HPBar.hpp" />
+    <ClInclude Include="LvIcon.hpp" />
     <ClInclude Include="Mousecursor.h" />
     <ClInclude Include="Fish.hpp" />
     <ClInclude Include="Garbage.hpp" />

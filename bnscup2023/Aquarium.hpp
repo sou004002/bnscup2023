@@ -12,7 +12,7 @@ public:
 
 private:
 	Texture _bg;
-	Vec2 _p;//右上座標
+	Vec2 _p;//左上座標
 	int32 _h;
 	int32 _w;
 
