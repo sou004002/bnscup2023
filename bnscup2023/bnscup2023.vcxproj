@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aquarium.cpp" />
+    <ClCompile Include="CollisionImage.cpp" />
     <ClCompile Include="Fish.cpp" />
     <ClCompile Include="FoodBtn.cpp" />
     <ClCompile Include="Garbage.cpp" />
@@ -324,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aquarium.hpp" />
+    <ClInclude Include="CollisionImage.hpp" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="FoodBtn.hpp" />
     <ClInclude Include="HPBar.hpp" />

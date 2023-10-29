@@ -14,6 +14,9 @@ void Main()
 	const Texture texture{ U"dotImages/whiteFish.svg" };
 	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
+	const Image image{ U"dotImages/whiteFish.svg" };
+	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
+	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
 	Fish fish(200,300,100,texture,2);
 
 
@@ -23,7 +26,7 @@ void Main()
 	const int32 aqua_w = Scene::Width() - aqua_frameThick * 2;
 	const int32 aqua_h = 400;
 	const Vec2 aqua_pos = { Scene::Width() - (aqua_w + aqua_frameThick),
-		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
+		Scene::Height() - (aqua_h + aqua_frameThick) };//左上の座標
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
 	//HPバー
 	const ColorF HPColor{ 0.8,0.2,0.2 };
@@ -83,14 +86,14 @@ void Main()
 		foodBtn.draw();
 
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
-			cursor.texture = cursor.otete;
-			cursor.feed = true;
-			cursor.pickGarbage = false;
+			cursor.m_image = cursor.m_otete;
+			cursor.m_feed = true;
+			cursor.m_pickGarbage = false;
 		}
 		if (SimpleGUI::Button(U"ゴミを片付ける", Vec2{ 30, 450 })) {
-			cursor.texture = cursor.net;
-			cursor.feed = false;
-			cursor.pickGarbage = true;
+			cursor.m_image = cursor.m_net;
+			cursor.m_feed = false;
+			cursor.m_pickGarbage = true;
 		}
 
 		accumulator += Scene::DeltaTime();
@@ -103,24 +106,44 @@ void Main()
 			}
 		}
 
-		fish.move();
-		fish.draw();
+		fish1.move();
+		fish2.move();
+		fish1.draw();
+		fish2.draw();
+
+		String st;
+		if (fish1.isCollision(fish2))
+		{
+			st = U"こりじょん！！";
+		}
+		else
+		{
+			st = U"のっとこりじょん！！";
+		}
+		Print << st;
 
 		if (MouseL.down()) {
-			if (cursor.feed && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {
-				arrayFood.push_back(cursor.generate(Cursor::Pos().x)); //ここで配列にこれを追加したい
+			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
+				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h)); //ここで配列にこれを追加したい
 			}
 		}
 		for (Food& i : arrayFood) {//全ての餌を処理する。
 			i.move();
 			i.draw();
-			if (i.trash_time >= 100) {
-				//ゴミに変換
-				//x座標は何らかの方法で保持
-				//Garbage gm(s, t, z);//これを配列に加える。
+			i.removal();
+			if (i.m_trashTime >= 10) {
+				for (int32 i = 0; i < size(arrayFood); i++) {//全ての餌を処理する。
+					arrayFood[i].move();
+					arrayFood[i].draw();
+					if (arrayFood[i].m_trashTime >= 10) {//地面に落ちてからゴミと化すまでの時間
+						//garbages.push_back(Garbage(1, gomi, 0.0));
+						//garbages[-1].putpoints(Vec2{ arrayFood[i].m_x, arrayFood[i].m_y });
+						//要素どうやって消すの
+					}
+				}
 			}
 		}
-		cursor.move();
+		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
 		cursor.draw();
 	}
 }
