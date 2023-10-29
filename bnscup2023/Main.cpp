@@ -10,14 +10,6 @@
 
 void Main()
 {
-	const Texture emoji{ U"🐟"_emoji };
-	const Texture texture{ U"dotImages/whiteFish.svg" };
-	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
-	const Texture fBtn{ U"🍴"_emoji };
-	const Image image{ U"dotImages/whiteFish.svg" };
-	Fish fish1(200, 300, 200.0 / image.width(), image, 2);
-	Fish fish2(200, 300, 500.0 / image.width(), image, 2);
-	//Fish fish(200,300,100,texture,2);
 
 
 	//水槽の作成
@@ -63,6 +55,12 @@ void Main()
 	const int32 g_range_w = 800;
 	const int32 g_range_h = 600;
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
+
+	const Texture emoji{ U"🐟"_emoji };
+	const Image image{ U"dotImages/whiteFish.svg" };
+	const Texture fBtn{ U"🍴"_emoji };
+	Fish fish1(200, 300, 100.0, image, 2, gv);
+
 	const Texture gomi{ U"🗑"_emoji };
 	const Texture garb{ U"dotImages/Garbage.svg" };
 	double accumulator = 0.0;
@@ -107,20 +105,7 @@ void Main()
 		}
 
 		fish1.move();
-		fish2.move();
 		fish1.draw();
-		fish2.draw();
-
-		String st;
-		if (fish1.isCollision(fish2))
-		{
-			st = U"こりじょん！！";
-		}
-		else
-		{
-			st = U"のっとこりじょん！！";
-		}
-		Print << st;
 
 		if (MouseL.down()) {
 			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
