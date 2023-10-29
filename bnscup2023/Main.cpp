@@ -4,15 +4,18 @@
 #include "Mousecursor.h"
 #include "Food.h"
 #include "Aquarium.hpp"
-
-
+#include "HPBar.hpp"
+#include "LvIcon.hpp"
+#include "FoodBtn.hpp"
 
 void Main()
 {
 	const Texture emoji{ U"🐟"_emoji };
 	const Texture texture{ U"dotImages/whiteFish.svg" };
+	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
-	Fish fish(200, 300, 100, texture, 2);
+	Fish fish(200,300,100,texture,2);
+
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -22,7 +25,37 @@ void Main()
 	const Vec2 aqua_pos = { Scene::Width() - (aqua_w + aqua_frameThick),
 		Scene::Height() - (aqua_h + aqua_frameThick) };//右下詰め
 	Aquarium gv(backGround, aqua_pos, aqua_w, aqua_h, aqua_frameThick);
+	//HPバー
+	const ColorF HPColor{ 0.8,0.2,0.2 };
+	const int32 initialHP = 400;
+	const int32 HPBarPosX = 200;
+	const int32 HPBarPosY = 30;
+	const int32 HPBarWidth = 470;
+	const int32 HPBarHeight = 30;
+	HPBar hpBar{ HPColor,initialHP };
+	constexpr Rect HPRect{ HPBarPosX,HPBarPosY,HPBarWidth,HPBarHeight };
+	Font font{ FontMethod::MSDF, 30 ,U"example/font/INVASION2000.TTF", FontStyle::Bitmap };
 
+
+
+	//レベルアイコン
+	const Vec2 levelIconPos{ 10,10 };
+	const double levelIconSize = 0.3;
+	const int32 initialLevel = 1;
+	LvIcon levelIcon{ levelIconPos,levelIconSize,initialLevel };
+
+
+	//EXPバー
+	const ColorF EXPColor{ 0, 0.851, 0.063 };
+	const int32 initialEXP = 0;
+	HPBar expBar{ EXPColor,initialEXP };
+	const int32 EXPBarPosX = 100;
+	const int32 EXPBarPosY = 30 + HPBarPosY + HPBarHeight;
+	const int32 EXPBarWidth = 470 + (HPBarPosX - EXPBarPosX);
+	const int32 EXPBarHeight = 15;
+	constexpr Rect EXPRect{ EXPBarPosX,EXPBarPosY,EXPBarWidth,EXPBarHeight };
+
+	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
 	//ごみの生成範囲
 	const int32 g_range_w = 800;
 	const int32 g_range_h = 600;
@@ -38,12 +71,17 @@ void Main()
 
 	while (System::Update())
 	{
-		//ClearPrint();
+		ClearPrint();
+		blackBorder.scaled(0.5).draw();
+		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
 		gv.init();
+		hpBar.draw(HPRect);
+		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
+		expBar.draw(EXPRect);
+		levelIcon.draw();
+		foodBtn.update();
+		foodBtn.draw();
 
-		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
-		Line{ 700, 200, 700, 600 }.draw(3, Palette::White);
-		Line{ 300, 600, 700, 600 }.draw(3, Palette::White);
 		if (SimpleGUI::Button(U"エサを与える", Vec2{ 30, 400 })) {
 			cursor.texture = cursor.otete;
 			cursor.feed = true;
