@@ -46,7 +46,9 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 		}
 		gab.putpoints(pos);
 		garbage << gab;
-		time = time + 3.0;
+		time += Scene::DeltaTime();
+		time = time * 1000000;
+		Print << time;
 	}
 
 	return garbage;

@@ -38,7 +38,7 @@ void Main()
 
 	while (System::Update())
 	{
-		ClearPrint();
+		//ClearPrint();
 		gv.init();
 
 		Line{ 300, 200, 300, 600 }.draw(3, Palette::White);
