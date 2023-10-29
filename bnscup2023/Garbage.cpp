@@ -34,6 +34,7 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
 	double time = 0.0;
+	double const cooltime = 3.0;
 
 	for (const auto& point : pd.getPoints())
 	{
@@ -46,9 +47,7 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, in
 		}
 		gab.putpoints(pos);
 		garbage << gab;
-		time += Scene::DeltaTime();
-		time = time * 1000000;
-		Print << time;
+		time += cooltime;
 	}
 
 	return garbage;
