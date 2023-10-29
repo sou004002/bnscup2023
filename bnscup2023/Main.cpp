@@ -23,7 +23,6 @@ void Main()
 	const Image image{ U"dotImages/whiteFish.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish1(200, 300, 100.0, image, 2, gv);
-	Fish fish2(200, 300, 300.0, image, 2, gv);
 
 	constexpr Rect SceneRect{ 0, 0, 800, 600 };
 	const Texture gomi{ U"🗑"_emoji };
@@ -65,20 +64,7 @@ void Main()
 		}
 
 		fish1.move();
-		fish2.move();
 		fish1.draw();
-		fish2.draw();
-
-		String st;
-		if (fish1.isCollision(fish2))
-		{
-			st = U"こりじょん！！";
-		}
-		else
-		{
-			st = U"のっとこりじょん！！";
-		}
-		Print << st;
 
 		if (MouseL.down()) {
 			if (cursor.feed && 300 <= Cursor::Pos().x && Cursor::Pos().x <= 700) {

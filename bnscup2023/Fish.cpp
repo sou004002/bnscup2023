@@ -5,11 +5,16 @@ double interval = 1.0;
 
 void Fish::move()
 {
+	Polygon scaledPolygon = m_polygon.scaled(m_scale);
+	double offsetX = scaledPolygon.outer().map(
+			[](const Vec2& a) {return a.x; }).sorted().front();
+	double offsetY = scaledPolygon.outer().map(
+		[](const Vec2& a) {return a.y; }).sorted().front();
+
 	const RectF tank = m_aquarium._frame.stretched(-m_width / 8, -m_height / 4)
-		.movedBy(-m_width / 8, -m_height / 4).scaled(0.9);
-	tank.drawFrame(2, 2, Palette::Orange);
-	Print << m_width << U", " << m_height;
-	Circle{ m_point,10 }.draw(Palette::Forestgreen);
+		.movedBy(-m_width / 8 - offsetX, -m_height / 4 - offsetY).scaled(0.9);
+	//tank.drawFrame(2, 2, Palette::Orange);
+	//Circle(m_point, 5).draw(Palette::Forestgreen);
 
 	m_time += Scene::DeltaTime();
 	if (interval <= m_time)
@@ -24,12 +29,12 @@ void Fish::move()
 bool Fish::isCollision(const CollisionImage& ci) const
 {
 	//　当たり判定がどこにあるか表示
-	m_polygon.scaled(m_scale).movedBy(m_point)
-		.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
-		.drawWireframe(2, Palette::Yellow);
-	ci.getPolygon().scaled(ci.getScale()).movedBy(ci.getPoint())
-		.draw(ColorF{ 0.0, 1.0, 1.0, 0.2 })
-		.drawWireframe(2, Palette::Red);
+	//m_polygon.scaled(m_scale).movedBy(m_point)
+	//	.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
+	//	.drawWireframe(2, Palette::Yellow);
+	//ci.getPolygon().scaled(ci.getScale()).movedBy(ci.getPoint())
+	//	.draw(ColorF{ 0.0, 1.0, 1.0, 0.2 })
+	//	.drawWireframe(2, Palette::Red);
 
 	return m_polygon.scaled(m_scale).movedBy(m_point)
 		.intersects(ci.getPolygon().scaled(ci.getScale()).moveBy(ci.getPoint()));

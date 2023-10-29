@@ -6,10 +6,10 @@ class Fish : public CollisionImage
 {
 public:
 	Fish(int32 x, int32 y, double w, Image i, int32 ac, Aquarium aq)
-		:CollisionImage(x, y, w*2, i, aq),
+		:CollisionImage(x, y, w * 2, i, aq),
 		m_to({ x, y }), m_v({ 0, 0 }), m_time(0.0), m_animNum(ac) {};
 	Fish(Vec2 p, double w, Image i, int32 ac, Aquarium aq)
-		:CollisionImage(p, w*2, i, aq),
+		:CollisionImage(p, w * 2, i, aq),
 		m_to(p), m_v({ 0, 0 }), m_time(0.0), m_animNum(ac) {};
 
 	void draw() const override;
