@@ -72,23 +72,19 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		blackBorder.scaled(0.5).draw();
-		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
+		/*blackBorder.scaled(0.5).draw();
+		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);*/
 		gv.init();
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
 		levelIcon.draw();
-		foodBtn.draw();
-		if (MouseR.pressed() && foodBtn.getEnabled()) {
-			foodBtn.click();
-			foodBtn.m_interval.start();
-		}
-		if (foodBtn.m_interval.reachedZero()) {
-			foodBtn.setEnabled();
-			foodBtn.m_interval.reset();
 
-		}
+		Print << foodBtn.click();
+	
+		
+		foodBtn.draw();
+
 		//if (MouseR.pressed()) {
 		//	hpBar.damage(10);
 		//	levelIcon.levelUp();
