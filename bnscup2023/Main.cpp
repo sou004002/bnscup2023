@@ -10,7 +10,7 @@
 
 void Main()
 {
-
+	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -67,17 +67,17 @@ void Main()
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
 
-	Mousecursor cursor(200, 300);
+	Mousecursor cursor(200, 300, gv);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
 
 	while (System::Update())
 	{
 		ClearPrint();
 		blackBorder.scaled(0.5).draw();
-		blackBorder.scaled(0.5).draw((int32)(blackBorder.width()/2), -30);
+		blackBorder.scaled(0.5).draw((int32)(blackBorder.width() / 2), -30);
 		gv.init();
 		hpBar.draw(HPRect);
-		font(U"HP").draw(30,HPBarPosX - 60, HPBarPosY);
+		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
 		levelIcon.draw();
 		foodBtn.update();
@@ -108,7 +108,7 @@ void Main()
 		fish1.draw();
 
 		if (MouseL.down()) {
-			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
+			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x + aqua_w) {
 				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h)); //ここで配列にこれを追加したい
 			}
 		}
@@ -128,7 +128,7 @@ void Main()
 				}
 			}
 		}
-		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
+		cursor.move(aqua_pos.x, aqua_pos.x + aqua_w, aqua_pos.y + aqua_h);
 		cursor.draw();
 	}
 }
