@@ -13,8 +13,12 @@ void Fish::move()
 
 	const RectF tank = m_aquarium._frame.stretched(-m_width / 8, -m_height / 4)
 		.movedBy(-m_width / 8 - offsetX, -m_height / 4 - offsetY).scaled(0.9);
-	//tank.drawFrame(2, 2, Palette::Orange);
-	//Circle(m_point, 5).draw(Palette::Forestgreen);
+	tank.drawFrame(2, 2, Palette::Orange);
+	Circle(m_point, 5).draw(Palette::Forestgreen);
+	//　当たり判定がどこにあるか表示
+	scaledPolygon.movedBy(m_point)
+		.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
+		.drawWireframe(2, Palette::Yellow);
 
 	m_time += Scene::DeltaTime();
 	if (interval <= m_time)

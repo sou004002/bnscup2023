@@ -57,7 +57,7 @@ void Main()
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 
 	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/whiteFish.svg" };
+	const Image image{ U"dotImages/jerryFish.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish1(200, 300, 100.0, image, 2, gv);
 
