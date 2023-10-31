@@ -29,24 +29,25 @@ bool Garbage::gethitter() const
 	return judge;
 }
 
-Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Image tex, bool clip)
+Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Image tex, Aquarium aq, bool clip)
 {
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
 	double time = 0.0;
-	double const cooltime = 3.0;
+	double cooltime = 3.0;
+	int32 count = 1;
 
 	for (const auto& point : pd.getPoints())
 	{
 		int32 place = Random(3);
 		Vec2 pos = (point + rect.pos);
-		Garbage gab(size, tex, time, place);
+		Garbage gab(size, tex, time, place, aq);
 		if (clip && (not rect.contains(pos)))
 		{
 			continue;
 		}
 		gab.putpoints(pos);
-		gab.setM_point(pos);
+		gab.move(pos);
 		garbage << gab;
 		if (count % 10 == 0) {
 			cooltime -= 0.5;

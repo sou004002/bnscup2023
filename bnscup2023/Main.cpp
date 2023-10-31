@@ -54,20 +54,23 @@ void Main()
 	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
 
 	//ごみの生成範囲
-	const int32 g_range_w = 800;
-	const int32 g_range_h = 600;
-	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
+	const int32 space = 30;
+	const int32 g_pos_x = gv.p_getter_x() + space;
+	const int32 g_pos_y = gv.p_getter_y() + space;
+	const int32 g_range_w = gv.w_getter() - space * 2;
+	const int32 g_range_h = gv.h_getter() - space * 2;
+	Rect SceneRect{ g_pos_x, g_pos_y, g_range_w, g_range_h };
+
+
+	const Texture gomi{ U"🗑"_emoji };
+	const Texture garb{ U"dotImages/Garbage.svg" };
+	const Image dust{ U"dotImages/Garbage.svg" };
+	double accumulator = 0.0;
+	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 50.0, 80000.0, dust, gv);
 
 	//魚
 	const Image blueFishImage{ U"dotImages/blueFish.svg" };
 	Fish fish1(200, 300, 100.0, blueFishImage, 2, gv);
-	//resultView rV{ levelIcon.getLevel() ,fish1.getTexture()};
-
-	const Texture gomi{ U"🗑"_emoji };
-	const Texture garb{ U"dotImages/garbageWithFrame.svg" };
-	double accumulator = 0.0;
-
-	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
 
 	//マウスカーソル
 	const Image otete{ U"dotImages/turtle.svg" };
@@ -100,7 +103,6 @@ void Main()
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
 		}
-		//rV.update(levelIcon.getLevel());
 		if (MouseR.down())
 		{
 			levelIcon.levelUp();
@@ -108,28 +110,7 @@ void Main()
 
 
 
-		fish1.move();
-		fish1.draw();
-
-		if (MouseL.down()) {
-			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x + aqua_w) {
-				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h, gv); //ここで配列にこれを追加したい
-			}
-		}
-
-		for (auto& i : arrayFood) {
-			i.move();
-			i.draw();
-			if (i.m_trashTime >= 1) {
-				Garbage g(30, garb, accumulator, 1);
-				g.putpoints(Vec2{ i.m_x, i.m_y });
-				garbages << g;
-			}
-		}
-		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
-
-		cursor.move(aqua_pos.x, aqua_pos.x + aqua_w, aqua_pos.y + aqua_h);
-		cursor.draw();
+		int32 count = 0;
 		accumulator += Scene::DeltaTime();
 		for (auto& gab : garbages)
 		{
@@ -137,7 +118,42 @@ void Main()
 			if (gab.gethitter() == true)
 			{
 				gab.draw();
+				count = count + 1;
+				if (fish1.isCollision(gab))
+				{
+					Print << U"Yes！！";
+				}
+				else
+				{
+					Print << U"No！！";
+				}
 			}
 		}
+
+		fish1.move();
+
+		fish1.draw();
+
+		if (MouseL.down()) {
+			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x + aqua_w) {
+				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h, gv)); //ここで配列にこれを追加したい
+			}
+		}
+
+		for (auto& i : arrayFood) {
+			i.move();
+			i.draw();
+			if (i.m_trashTime >= 1) {
+				Garbage g(80000.0, dust, accumulator, 1, gv);
+				g.putpoints(Vec2{ i.m_x, i.m_y });
+				g.move(Vec2{ i.m_x, i.m_y });
+				garbages << g;
+			}
+		}
+		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
+
+		cursor.move(aqua_pos.x, aqua_pos.x + aqua_w, aqua_pos.y + aqua_h);
+
+		cursor.draw();
 	}
 }
