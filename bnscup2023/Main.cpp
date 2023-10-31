@@ -7,10 +7,11 @@
 #include "HPBar.hpp"
 #include "LvIcon.hpp"
 #include "FoodBtn.hpp"
+#include "resultView.hpp"
 
 void Main()
 {
-	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
+	TextureAsset::Register(U"blackBorder", U"dotImages/blackBorder.svg");
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -51,6 +52,8 @@ void Main()
 	constexpr Rect EXPRect{ EXPBarPosX,EXPBarPosY,EXPBarWidth,EXPBarHeight };
 
 	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
+
+	resultView rV{ levelIcon.getLevel() };
 	//ごみの生成範囲
 	const int32 g_range_w = 800;
 	const int32 g_range_h = 600;
@@ -73,12 +76,13 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		blackBorder.scaled(0.5).draw();
-		blackBorder.scaled(0.5).draw((int32)(blackBorder.width() / 2), -30);
+		TextureAsset(U"blackBorder").scaled(0.5).draw();
+		TextureAsset(U"blackBorder").scaled(0.5).draw((int32)(TextureAsset(U"blackBorder").width() / 2), -30);
 		gv.init();
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
+		rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
@@ -92,6 +96,11 @@ void Main()
 			cursor.m_image = cursor.m_net;
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
+		}
+		rV.update(levelIcon.getLevel());
+		if (MouseR.down())
+		{
+			levelIcon.levelUp();
 		}
 
 		accumulator += Scene::DeltaTime();
