@@ -109,8 +109,8 @@ void Main()
 		fish1.draw();
 
 		if (MouseL.down()) {
-			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
-				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h); //ここで配列にこれを追加したい
+			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x + aqua_w) {
+				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h, gv); //ここで配列にこれを追加したい
 			}
 		}
 
@@ -125,7 +125,7 @@ void Main()
 		}
 		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 
-		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
+		cursor.move(aqua_pos.x, aqua_pos.x + aqua_w, aqua_pos.y + aqua_h);
 		cursor.draw();
 		accumulator += Scene::DeltaTime();
 		for (auto& gab : garbages)
