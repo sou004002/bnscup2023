@@ -53,19 +53,19 @@ void Main()
 
 	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
 
-	resultView rV{ levelIcon.getLevel() };
 	//ごみの生成範囲
 	const int32 g_range_w = 800;
 	const int32 g_range_h = 600;
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 
 	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/jerryFish.svg" };
+	const Image image{ U"dotImages/blueFish.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish1(200, 300, 100.0, image, 2, gv);
+	//resultView rV{ levelIcon.getLevel() ,fish1.getTexture()};
 
 	const Texture gomi{ U"🗑"_emoji };
-	const Texture garb{ U"dotImages/Garbage.svg" };
+	const Texture garb{ U"dotImages/garbageWithFrame.svg" };
 	double accumulator = 0.0;
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
@@ -82,7 +82,7 @@ void Main()
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
-		rV.draw();
+		//rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
@@ -97,7 +97,7 @@ void Main()
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
 		}
-		rV.update(levelIcon.getLevel());
+		//rV.update(levelIcon.getLevel());
 		if (MouseR.down())
 		{
 			levelIcon.levelUp();

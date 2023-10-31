@@ -52,3 +52,9 @@ void Fish::draw() const
 		0, m_texture.width() / m_animNum, m_texture.height())
 		.mirrored(0 < m_v.x).scaled(m_scale).draw(m_point);
 }
+
+Texture Fish::getTexture()
+{
+	return m_texture;
+
+}
