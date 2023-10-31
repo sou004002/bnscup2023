@@ -59,10 +59,10 @@ void Main()
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 
 	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/blueFish.svg" };
+	const Image image{ U"dotImages/turtle.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish1(200, 300, 100.0, image, 2, gv);
-	//resultView rV{ levelIcon.getLevel() ,fish1.getTexture()};
+	resultView rV{ levelIcon.getLevel() ,fish1.getTexture(),U"aaaaa"};
 
 	const Texture gomi{ U"🗑"_emoji };
 	const Texture garb{ U"dotImages/garbageWithFrame.svg" };
@@ -82,7 +82,7 @@ void Main()
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
-		//rV.draw();
+		rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
@@ -97,7 +97,7 @@ void Main()
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
 		}
-		//rV.update(levelIcon.getLevel());
+		rV.update(levelIcon.getLevel(),fish1.getTexture());
 		if (MouseR.down())
 		{
 			levelIcon.levelUp();
