@@ -96,15 +96,7 @@ void Main()
 			cursor.m_pickGarbage = true;
 		}
 
-		accumulator += Scene::DeltaTime();
-		for (auto& gab : garbages)
-		{
-			gab.changehitter(accumulator);
-			if (gab.gethitter() == true)
-			{
-				gab.draw();
-			}
-		}
+
 
 		fish1.move();
 		fish2.move();
@@ -127,16 +119,27 @@ void Main()
 				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h); //ここで配列にこれを追加したい
 			}
 		}
-		for (Food& i : arrayFood) {
+		
+		for (auto& i : arrayFood) {
 			i.move();
 			i.draw();
 			if (i.m_trashTime >= 1) {
-				garbages << Garbage(1, garb, 0.0, 0);
+				garbages << Garbage(1, garb, 1, 1);
 				garbages[-1].putpoints(Vec2{ i.m_x, i.m_y });
 			}
 		}
-		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime > 1); });
+		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
+
 		cursor.move(aqua_pos.x, aqua_pos.x+aqua_w, aqua_pos.y+aqua_h);
 		cursor.draw();
+		accumulator += Scene::DeltaTime();
+		for (auto& gab : garbages)
+		{
+			gab.changehitter(accumulator);
+			if (gab.gethitter() == true)
+			{
+				gab.draw();
+			}
+		}
 	}
 }
