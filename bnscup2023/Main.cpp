@@ -100,7 +100,7 @@ void Main()
 			cursor.m_pickGarbage = true;
 		}
 
-
+		int32 count = 0;
 		accumulator += Scene::DeltaTime();
 		for (auto& gab : garbages)
 		{
@@ -108,6 +108,7 @@ void Main()
 			if (gab.gethitter() == true)
 			{
 				gab.draw();
+				count = count + 1;
 				if (fish1.isCollision(gab))
 				{
 					Print << U"Yes！！";
