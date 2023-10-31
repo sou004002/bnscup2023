@@ -1,9 +1,9 @@
 ﻿#include "Food.h"
 
-void Food::move(){
+void Food::move() {
 	m_elapsedTime += Scene::DeltaTime();
 	if (!m_ground) {
-		m_x += Periodic::Sine1_1(2s, Scene::Time()+m_startTime);
+		m_x += Periodic::Sine1_1(2s, Scene::Time() + m_startTime);
 		if (m_elapsedTime >= 0.5) {//餌がランダムな横揺れを起こす間隔
 			if (RandomBool()) {
 				m_x += 1;
@@ -17,7 +17,7 @@ void Food::move(){
 		m_x = fmin(m_x, m_right - 5);
 	}
 	m_y = m_y + m_dy;
-	m_esaesa.setM_point(Vec2({ m_x, m_y }));
+	m_esaesa.move(Vec2({ m_x, m_y }));
 	if (m_y >= m_maxY - 10) {//10はマージン
 		m_y = m_maxY - 10;
 		m_ground = true;

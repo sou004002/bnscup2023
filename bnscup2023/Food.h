@@ -7,7 +7,7 @@ class Food {
 public:
 	Food(float x, Vec2 aqua, int32 w, int32 h, Aquarium aq)
 		:m_x(x), m_y(60),
-		m_esaesa((int32)m_x, (int32)m_y, 0.1, Image(U"dotImages/food.svg"), aq),
+		m_esaesa((int32)m_x, (int32)m_y, 5, Image(U"dotImages/food.svg"), aq),
 		m_left(aqua.x), m_right(m_left + (float)w), m_maxY(aqua.y + h), m_trashTime(0),
 		m_ground(false), m_elapsedTime(0), m_startTime(Random() * 2)
 	{	//m_x = x;

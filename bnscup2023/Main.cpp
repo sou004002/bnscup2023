@@ -58,10 +58,9 @@ void Main()
 	const int32 g_range_h = 600;
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 
-	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/blueFish.svg" };
-	const Texture fBtn{ U"🍴"_emoji };
-	Fish fish1(200, 300, 100.0, image, 2, gv);
+	//魚
+	const Image blueFishImage{ U"dotImages/blueFish.svg" };
+	Fish fish1(200, 300, 100.0, blueFishImage, 2, gv);
 	//resultView rV{ levelIcon.getLevel() ,fish1.getTexture()};
 
 	const Texture gomi{ U"🗑"_emoji };
@@ -70,7 +69,11 @@ void Main()
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
 
-	Mousecursor cursor(200, 300, gv);
+	//マウスカーソル
+	const Image otete{ U"dotImages/turtle.svg" };
+	const Image ami{ U"dotImages/ami.svg" };
+	const Image allow{ U"dotImages/tatsu.svg" };
+	Mousecursor cursor(200.0, 300.0, otete, ami, allow, gv);
 	Array<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
 
 	while (System::Update())

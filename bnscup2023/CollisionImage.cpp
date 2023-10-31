@@ -20,3 +20,8 @@ bool CollisionImage::isCollision(const CollisionImage& ci) const
 		.intersects(ci.getPolygon().scaled(ci.getScale()).moveBy(ci.getPoint()));
 }
 
+void CollisionImage::move(Vec2 v)
+{
+	m_point = v;
+}
+

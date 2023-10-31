@@ -1,6 +1,6 @@
 ﻿#include "Mousecursor.h"
 
-void Mousecursor::move(float min, float max , float maxY) {
+void Mousecursor::move(double min, double max, double maxY) {
 	if (m_feed) {
 		m_x = Cursor::Pos().x;
 		if (m_x <= min) m_x = min;
@@ -17,10 +17,10 @@ void Mousecursor::move(float min, float max , float maxY) {
 			m_image = m_allow;
 		}
 	}
+	m_image.move(Vec2({ m_x, m_y }));
 }
 
 void Mousecursor::draw() {
-	m_image.setM_point(Vec2({ m_x, m_y }));
 	m_image.draw();
 }
 
