@@ -7,10 +7,11 @@
 #include "HPBar.hpp"
 #include "LvIcon.hpp"
 #include "FoodBtn.hpp"
+#include "resultView.hpp"
 
 void Main()
 {
-	const Texture blackBorder{ U"dotImages/blackBorder.svg" };
+	TextureAsset::Register(U"blackBorder", U"dotImages/blackBorder.svg");
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -51,18 +52,20 @@ void Main()
 	constexpr Rect EXPRect{ EXPBarPosX,EXPBarPosY,EXPBarWidth,EXPBarHeight };
 
 	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
+
 	//ごみの生成範囲
 	const int32 g_range_w = 800;
 	const int32 g_range_h = 600;
 	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
 
 	const Texture emoji{ U"🐟"_emoji };
-	const Image image{ U"dotImages/whiteFish.svg" };
+	const Image image{ U"dotImages/blueFish.svg" };
 	const Texture fBtn{ U"🍴"_emoji };
 	Fish fish1(200, 300, 100.0, image, 2, gv);
+	//resultView rV{ levelIcon.getLevel() ,fish1.getTexture()};
 
 	const Texture gomi{ U"🗑"_emoji };
-	const Texture garb{ U"dotImages/Garbage.svg" };
+	const Texture garb{ U"dotImages/garbageWithFrame.svg" };
 	double accumulator = 0.0;
 
 	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
@@ -73,12 +76,13 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		blackBorder.scaled(0.5).draw();
-		blackBorder.scaled(0.5).draw((int32)(blackBorder.width() / 2), -30);
+		TextureAsset(U"blackBorder").scaled(0.5).draw();
+		TextureAsset(U"blackBorder").scaled(0.5).draw((int32)(TextureAsset(U"blackBorder").width() / 2), -30);
 		gv.init();
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
+		//rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
@@ -92,6 +96,11 @@ void Main()
 			cursor.m_image = cursor.m_net;
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
+		}
+		//rV.update(levelIcon.getLevel());
+		if (MouseR.down())
+		{
+			levelIcon.levelUp();
 		}
 
 		accumulator += Scene::DeltaTime();

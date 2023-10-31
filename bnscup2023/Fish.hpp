@@ -15,6 +15,8 @@ public:
 	void draw() const override;
 	void move();
 	bool isCollision(const CollisionImage& ci) const;
+	Texture getTexture();
+
 
 private:
 	Vec2 m_to;
