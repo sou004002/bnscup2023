@@ -34,9 +34,7 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
 	double time = 0.0;
-	double cooltime = 3.0;
-	//countでごみの増加速度を変更
-	int count = 1;
+	double const cooltime = 3.0;
 
 	for (const auto& point : pd.getPoints())
 	{

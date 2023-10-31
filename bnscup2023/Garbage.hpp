@@ -20,7 +20,6 @@ public:
 		double radius, double size, Image tex, bool clip = true);
 
 private:
-	void putpoints(Vec2 pos);
 
 	double g_x;
 	Vec2 g_p;
