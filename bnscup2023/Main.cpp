@@ -60,14 +60,18 @@ void Main()
 
 	FoodBtn foodBtn{ EXPBarPosX + EXPBarWidth + 20,HPBarPosY - 10,0.25 };
 	//ごみの生成範囲
-	const int32 g_range_w = 800;
-	const int32 g_range_h = 600;
-	constexpr Rect SceneRect{ 0, 0, g_range_w, g_range_h };
+	const int32 space = 30;
+	const int32 g_pos_x = gv.p_getter_x() + space;
+	const int32 g_pos_y = gv.p_getter_y() + space;
+	const int32 g_range_w = gv.w_getter() - space * 2;
+	const int32 g_range_h = gv.h_getter() - space * 2;
+	Rect SceneRect{ g_pos_x, g_pos_y, g_range_w, g_range_h};
 	const Texture gomi{ U"🗑"_emoji };
 	const Texture garb{ U"dotImages/Garbage.svg" };
+	const Image dust{ U"dotImages/Garbage.svg" };
 	double accumulator = 0.0;
 
-	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 52.0, 30, garb);
+	Array<Garbage> garbages = Garbage::GenerateRandomPoints(SceneRect, 50.0, 30, dust);
 
 	Mousecursor cursor(200, 300);
 	std::vector<Food> arrayFood; //Foodの配列を用意して、generateのたびに追加
@@ -96,6 +100,7 @@ void Main()
 			cursor.m_pickGarbage = true;
 		}
 
+
 		accumulator += Scene::DeltaTime();
 		for (auto& gab : garbages)
 		{
@@ -103,14 +108,21 @@ void Main()
 			if (gab.gethitter() == true)
 			{
 				gab.draw();
+				if (fish1.isCollision(gab))
+				{
+					Print << U"Yes！！";
+				}
+				else
+				{
+					Print << U"No！！";
+				}
 			}
 		}
-
 		fish1.move();
 		fish2.move();
 		fish1.draw();
 		fish2.draw();
-
+		/*
 		String st;
 		if (fish1.isCollision(fish2))
 		{
@@ -121,7 +133,7 @@ void Main()
 			st = U"のっとこりじょん！！";
 		}
 		Print << st;
-
+		*/
 		if (MouseL.down()) {
 			if (cursor.m_feed && aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= aqua_pos.x+aqua_w) {
 				arrayFood.push_back(Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h)); //ここで配列にこれを追加したい
