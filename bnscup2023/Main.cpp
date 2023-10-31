@@ -119,13 +119,14 @@ void Main()
 				arrayFood << Food(Cursor::Pos().x, aqua_pos, aqua_w, aqua_h); //ここで配列にこれを追加したい
 			}
 		}
-		
+
 		for (auto& i : arrayFood) {
 			i.move();
 			i.draw();
 			if (i.m_trashTime >= 1) {
-				garbages << Garbage(1, garb, 1, 1);
-				garbages[-1].putpoints(Vec2{ i.m_x, i.m_y });
+				Garbage g(30, garb, accumulator, 1);
+				g.putpoints(Vec2{ i.m_x, i.m_y });
+				garbages << g;
 			}
 		}
 		arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
