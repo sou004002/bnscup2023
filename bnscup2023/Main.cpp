@@ -9,6 +9,7 @@ void Main()
 	TextureAsset::Register(U"blackBorder", U"dotImages/blackBorder.svg");
 	TextureAsset::Register(U"backGround", U"dotImages/bg.svg");
 	FontAsset::Register(U"MiddleFont", FontMethod::MSDF, 30, U"example/font/INVASION2000.TTF", FontStyle::Bitmap);
+
 	App manager;
 	manager.add<Title>(State::Title);
 	manager.add<Game>(State::Game);
