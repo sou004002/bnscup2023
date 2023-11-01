@@ -12,6 +12,7 @@
 void Main()
 {
 	TextureAsset::Register(U"blackBorder", U"dotImages/blackBorder.svg");
+	FontAsset::Register(U"MiddleFont", FontMethod::MSDF, 30, U"example/font/INVASION2000.TTF", FontStyle::Bitmap);
 
 	//水槽の作成
 	const Texture backGround{ U"dotImages/bg.svg" };
@@ -30,7 +31,7 @@ void Main()
 	const int32 HPBarHeight = 30;
 	HPBar hpBar{ HPColor,initialHP };
 	constexpr Rect HPRect{ HPBarPosX,HPBarPosY,HPBarWidth,HPBarHeight };
-	Font font{ FontMethod::MSDF, 30 ,U"example/font/INVASION2000.TTF", FontStyle::Bitmap };
+	//Font font{ FontMethod::MSDF, 30 ,U"example/font/INVASION2000.TTF", FontStyle::Bitmap };
 
 
 
@@ -87,9 +88,9 @@ void Main()
 		TextureAsset(U"blackBorder").scaled(0.5).draw((int32)(TextureAsset(U"blackBorder").width() / 2), -30);
 		gv.init();
 		hpBar.draw(HPRect);
-		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
+		FontAsset(U"MiddleFont")(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
-		rV.draw();
+		//rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
