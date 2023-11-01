@@ -20,7 +20,7 @@ void Mousecursor::move(double min, double max, double maxY) {
 	m_image.move(Vec2({ m_x, m_y }));
 }
 
-void Mousecursor::draw() {
+void Mousecursor::draw() const{
 	m_image.draw();
 }
 

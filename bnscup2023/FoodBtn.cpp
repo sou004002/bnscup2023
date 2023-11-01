@@ -21,7 +21,7 @@ void FoodBtn::update() {
 		m_pressed = !m_pressed;
 	}
 }
-void FoodBtn::draw(){
+void FoodBtn::draw() const{
 	if (m_pressed) {
 		m_texture(m_texture.width() / 2, 0, m_texture.width() / 2, m_texture.height()).scaled(m_s).draw(m_p);
 
@@ -32,6 +32,6 @@ void FoodBtn::draw(){
 		m_rect.drawFrame(3,ColorF{0,0,0,0});
 }
 
-bool FoodBtn::getPressed() {
+bool FoodBtn::getPressed() const{
 	return m_pressed;
 }

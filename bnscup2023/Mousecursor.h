@@ -31,6 +31,6 @@ public:
 	bool m_feed;
 	bool m_pickGarbage;
 	void move(double min, double max, double maxY);
-	void draw();
+	void draw() const;
 };
 

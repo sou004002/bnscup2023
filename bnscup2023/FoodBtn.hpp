@@ -8,10 +8,10 @@ public:
 		:m_p(p), m_s(s),m_pressed(false){};
 	FoodBtn(int32 x,int32 y, double s)
 		:m_p({x,y}), m_s(s), m_pressed(false){};
-	void draw();
+	void draw() const;
 
 	Vec2 getPos();
-	bool getPressed();
+	bool getPressed() const;
 	void update();
 	
 
