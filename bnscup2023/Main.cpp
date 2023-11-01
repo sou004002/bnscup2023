@@ -9,11 +9,12 @@ void Main()
 	TextureAsset::Register(U"blackBorder", U"dotImages/blackBorder.svg");
 	TextureAsset::Register(U"backGround", U"dotImages/bg.svg");
 	FontAsset::Register(U"MiddleFont", FontMethod::MSDF, 30, U"example/font/INVASION2000.TTF", FontStyle::Bitmap);
+	FontAsset::Register(U"MiddleFontJap", FontMethod::MSDF, 30, U"example/font/misaki_gothic_2nd.ttf", FontStyle::Bitmap);
 
 	App manager;
 	manager.add<Title>(State::Title);
 	manager.add<Game>(State::Game);
-	manager.init(State::Game);//ゲームシーンから始めたいときはこの行を有効にする
+	//manager.init(State::Game);//ゲームシーンから始めたいときはこの行を有効にする
 
 	
 

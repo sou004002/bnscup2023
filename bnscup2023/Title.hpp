@@ -13,6 +13,6 @@ public:
 
 private:
 
-	Rect m_startButton{ Arg::center = Scene::Center(),300,60 };
+	Rect m_startButton{ Arg::center(Scene::Center().x,500),300,60 };
 	Transition m_startTransition{ 0.4s,0.2s };
 };

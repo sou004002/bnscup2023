@@ -21,10 +21,13 @@ void Title::update()
 
 void Title::draw() const
 {
-	Scene::SetBackground(ColorF{ 0.2,0.8,0.4 });
-	FontAsset(U"MiddleFont")(U"TITLE").drawAt(TextStyle::OutlineShadow(0.2, ColorF{ 0.2, 0.6, 0.2 },
-		Vec2{ 3, 3 }, ColorF{ 0.0, 0.5 }), 100, Vec2{ 400, 100 });
+	Scene::SetBackground(ColorF{ 0.494,0.796,0.902 });
+	TextureAsset(U"backGround").scaled(1.2).draw(Arg::bottomLeft(0,Scene::Height()));
+	FontAsset(U"MiddleFontJap")(U"餌をやる。").draw(TextStyle::Shadow(Vec2{2,2},ColorF{0.0,0.5}), 45, Arg::leftCenter(300, 150));
+	FontAsset(U"MiddleFontJap")(U"そして").draw(45, Arg::leftCenter(300, 210));
+	FontAsset(U"MiddleFontJap")(U"ごみを拾う。").draw(45, Arg::leftCenter(300, 270));
+
 	m_startButton.draw(ColorF{ 1.0,m_startTransition.value() }).drawFrame(2);
 
-	FontAsset(U"MiddleFont")(U"Start").drawAt(m_startButton.center(), ColorF{ 0.25 });
+	FontAsset(U"MiddleFont")(U"Start").drawAt(m_startButton.center(), ColorF{ 1-m_startTransition.value() });
 }
