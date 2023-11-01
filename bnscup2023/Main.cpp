@@ -62,6 +62,7 @@ void Main()
 	Rect SceneRect{ g_pos_x, g_pos_y, g_range_w, g_range_h };
 
 
+
 	const Texture gomi{ U"🗑"_emoji };
 	const Texture garb{ U"dotImages/Garbage.svg" };
 	const Image dust{ U"dotImages/Garbage.svg" };
@@ -88,7 +89,7 @@ void Main()
 		hpBar.draw(HPRect);
 		font(U"HP").draw(30, HPBarPosX - 60, HPBarPosY);
 		expBar.draw(EXPRect);
-		//rV.draw();
+		rV.draw();
 		levelIcon.draw();
 		foodBtn.update();
 		foodBtn.draw();
@@ -103,6 +104,7 @@ void Main()
 			cursor.m_feed = false;
 			cursor.m_pickGarbage = true;
 		}
+
 		if (MouseR.down())
 		{
 			levelIcon.levelUp();
