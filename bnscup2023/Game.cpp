@@ -46,6 +46,9 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			g.move(Vec2{ i.m_x, i.m_y });
 			m_garbages << g;
 		}
+		if (i.m_esaesa.isCollision(m_fish1)) {
+
+		}
 	}
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 	m_cursor.move(m_aqua_pos.x, m_aqua_pos.x + m_aqua_w, m_aqua_pos.y + m_aqua_h);
