@@ -16,6 +16,8 @@ private:
 	Rect m_startButton{ Arg::center(Scene::Center().x,500),300,60 };
 	Transition m_startTransition{ 0.4s,0.2s };
 	Texture m_bubble = TextureAsset(U"bubble");
-	Vec2 m_bubblePos{ 0,(int)Scene::Height()};
+	Array<Vec2> m_bubblePos = { {Random(50, (int)Scene::Width()-50),Random((int)Scene::Height(),(int)Scene::Height()*2)}
+	,{Random(50, (int)Scene::Width() - 50),Random((int)Scene::Height(),(int)Scene::Height() * 2)}
+	,{Random(50, (int)Scene::Width() - 50),Random((int)Scene::Height(),(int)Scene::Height() * 2)} }; //Foodの配列を用意して、generateのたびに追加
 	double m_accumulator = 0.0;
 };
