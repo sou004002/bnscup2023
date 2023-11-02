@@ -3,7 +3,7 @@
 Game::Game(const InitData& init)
 	:IScene{ init }
 {
-	
+
 
 }
 
@@ -20,8 +20,8 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	{
 		gab.changehitter(m_accumulator);
 	}
-	m_fish1.move();//polygonは描画されない
-	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 3) {
+	m_fish1.move();
+	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
 		if (m_cursor.m_feed && m_aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= m_aqua_pos.x + m_aqua_w) {
 			m_arrayFood.push_back(Food(Cursor::Pos().x, m_aqua_pos, m_aqua_w, m_aqua_h, m_aqua)); //ここで配列にこれを追加したい
 		}
@@ -50,6 +50,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		if (!i.m_eaten) {
 			if (m_fish1.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
 				i.m_eaten = true;
+				Print << U"umai";
 				//経験値を増加させる。
 			}
 		}
