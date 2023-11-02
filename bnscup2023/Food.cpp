@@ -30,7 +30,7 @@ void Food::move() {
 void Food::eaten(Fish fish)
 {
 	if (m_esaesa.isCollision(fish)) {
-
+		//Print << U"食べてみた";
 	}
 }
 

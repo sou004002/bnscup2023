@@ -5,14 +5,17 @@ void Garbage::draw() const
 {
 	//分割数
 	int32 div = 4;
-	int32 tex_w = m_texture.width() / div;
-	this->m_texture(tex_w * this->g_Cut, 0, tex_w, m_texture.height()).resized(this->m_scale).drawAt(this->m_point);
+	int32 tex_w = g_texture.width() / div;
+	this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p);
+	this->g_circle.drawFrame();
 }
 
 void Garbage::putpoints(Vec2 pos)
 {
+	int32 radius = 7;
 	this->g_p = pos;
 	this->g_x = pos.x;
+	this->g_circle =  Circle { pos, radius };
 }
 
 void Garbage::changehitter(double t)
@@ -29,7 +32,12 @@ bool Garbage::gethitter() const
 	return judge;
 }
 
-Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Image tex, Aquarium aq, bool clip)
+Circle Garbage::getcircle()
+{
+	return this->g_circle;
+}
+
+Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Texture tex, bool clip)
 {
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
@@ -41,13 +49,12 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 	{
 		int32 place = Random(3);
 		Vec2 pos = (point + rect.pos);
-		Garbage gab(size, tex, time, place, aq);
+		Garbage gab(size, tex, time, place);
 		if (clip && (not rect.contains(pos)))
 		{
 			continue;
 		}
 		gab.putpoints(pos);
-		gab.move(pos);
 		garbage << gab;
 		if (count % 10 == 0) {
 			cooltime -= 0.5;
