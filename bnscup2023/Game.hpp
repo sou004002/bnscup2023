@@ -69,4 +69,5 @@ private:
 	const Image m_allow{ U"dotImages/cursor.svg" };
 	Mousecursor m_cursor{ 200.0, 300.0, m_otete, m_ami, m_allow, m_aqua };
 	Array<Food> m_arrayFood; //Foodの配列を用意して、generateのたびに追加
+	double m_marginTime = 3.0;
 };
