@@ -41,15 +41,13 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	for (auto& i : m_arrayFood) {
 	i.move();
 		if (i.m_trashTime >= 1) {
-			Garbage g(80000.0, m_dust, m_accumulator, 1, m_aqua);
+			Garbage g(30.0, m_dust, m_accumulator, 1);
 			g.putpoints(Vec2{ i.m_x, i.m_y });
-			g.move(Vec2{ i.m_x, i.m_y });
 			m_garbages << g;
 		}
 	}
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 	m_cursor.move(m_aqua_pos.x, m_aqua_pos.x + m_aqua_w, m_aqua_pos.y + m_aqua_h);
-
 
 }
 

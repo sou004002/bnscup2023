@@ -56,9 +56,9 @@ private:
 	const int32 m_g_range_h = m_aqua.h_getter() - m_g_space * 2;
 	Rect m_SceneRect{ m_g_pos_x, m_g_pos_y, m_g_range_w, m_g_range_h };
 
-	const Image m_dust{ U"dotImages/Garbage.svg" };
+	const Texture m_dust{ U"dotImages/Garbage.svg" };
 	double m_accumulator = 0.0;
-	Array<Garbage> m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 80000.0, m_dust, m_aqua);
+	Array<Garbage> m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 30.0, m_dust);
 
 	const Image m_blueFishImage{ U"dotImages/blueFish.svg" };
 	Fish m_fish1{ 200, 300, 100.0, m_blueFishImage, 2, m_aqua };
