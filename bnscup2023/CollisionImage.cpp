@@ -4,9 +4,9 @@
 void CollisionImage::draw() const
 {
 	//　当たり判定がどこにあるか表示
-	m_circle.movedBy(m_circleCenter)
-		.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
-		.drawFrame(2, Palette::Yellow);
+	//m_circle.movedBy(m_circleCenter)
+	//	.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
+	//	.drawFrame(2, Palette::Yellow);
 
 	m_texture.scaled(m_scale).draw(m_point);
 }
