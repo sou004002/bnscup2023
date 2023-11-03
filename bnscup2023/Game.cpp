@@ -16,6 +16,9 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	//{
 	//	levelIcon.levelUp();
 	//}
+
+	//水槽内のごみの数の初期化
+	garbage_in_aq = 0;
 	for (auto& gab : m_garbages)
 	{
 		gab.changehitter(m_accumulator);
@@ -23,6 +26,10 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			if (gab.getcircle().intersects(m_cursor.m_image.getCircle().movedBy(m_cursor.m_image.getPoint())))
 			{
 				gab.set_del(gab.getcircle().leftClicked());
+			}
+			if (gab.get_del() == false)
+			{
+				garbage_in_aq = garbage_in_aq + 1;
 			}
 		}
 		
@@ -53,6 +60,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			Garbage g(30.0, m_dust, m_accumulator, 1);
 			g.putpoints(Vec2{ i.m_x, i.m_y });
 			m_garbages << g;
+			garbage_in_aq = garbage_in_aq + 1;
 		}
 		if (!i.m_eaten) {
 			if (m_fish1.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
@@ -63,10 +71,16 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		}
 		else { i.m_eaten = false; }//冗長に思えるかもしれないけど必要です。
 	}
+	
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_eaten); });
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 	m_cursor.move(m_aqua_pos.x, m_aqua_pos.x + m_aqua_w, m_aqua_pos.y + m_aqua_h);
 	m_garbages.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
+
+	//ごみの数によってダメージ
+	damage = guard - garbage_in_aq;
+	if (damage > 0) damage = 0;
+	m_hpBar.damage(abs(damage));
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
