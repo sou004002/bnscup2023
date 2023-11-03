@@ -104,6 +104,7 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	m_levelIcon.draw();
 	m_foodBtn.draw();
 
+	m_cursor.draw();
 	for (auto& gab : m_garbages)
 	{
 		if (gab.gethitter()) {
@@ -115,6 +116,4 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	for (auto& i : m_arrayFood) {
 		i.draw();
 	}
-
-	m_cursor.draw();
 }
