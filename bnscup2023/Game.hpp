@@ -59,6 +59,10 @@ private:
 	const Texture m_dust{ U"dotImages/Garbage.svg" };
 	double m_accumulator = 0.0;
 	Array<Garbage> m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 30.0, m_dust);
+	int32 max_garbage_number = 100;
+	int32 garbage_in_aq = 0;
+	int32 guard = 10;
+	int32 damage = 0;
 
 	const Image m_blueFishImage{ U"dotImages/blueFish.svg" };
 	Fish m_fish1{ 200, 300, 100.0, m_blueFishImage, 2, m_aqua };
