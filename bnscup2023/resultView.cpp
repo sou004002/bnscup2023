@@ -8,7 +8,7 @@ Rect resultView::getTitleRect() {
 	return m_titleRect;
 }
 
-void resultView::draw() {
+void resultView::draw() const{
 	const int32 frameThickness = 20;
 	Rect mainView{ Arg::center((int)Scene::Width() / 2,(int)Scene::Height() / 2),600,450 };
 	mainView.draw(ColorF{ 0.15 });
@@ -23,10 +23,10 @@ void resultView::draw() {
 	texRect.draw(ColorF{ 1 });
 	//texRect.drawFrame(frameThickness);
 	texRect(m_tex(0,0,300,300)).draw();
-	m_retryRect.draw(ColorF{ 1 }).drawFrame(10,ColorF{0});
-	m_font(U"Retry").draw(40, Arg::topLeft = Vec2{ (int)mainView.w / 4 + mainView.x - m_retryRect.w / 2+35, (int)mainView.y + 358 }, ColorF{ 0 });
-	m_titleRect.draw(ColorF{ 1 }).drawFrame(10, ColorF{ 0 });
-	m_font(U"Title").draw(40, Arg::topLeft = Vec2{ (int)mainView.w * 3 / 4 + mainView.x - m_retryRect.w / 2+50, (int)mainView.y + 360 }, ColorF{ 0 });
+	m_retryRect.draw(ColorF{ 1.0,m_retryTransition.value() }).drawFrame(2);
+	m_font(U"Retry").drawAt(m_retryRect.center(), ColorF{ 1 - m_retryTransition.value() });
+	m_titleRect.draw(ColorF{ 1.0,m_titleTransition.value() }).drawFrame(2);
+	m_font(U"Title").drawAt(m_titleRect.center(), ColorF{ 1 - m_titleTransition.value() });
 }
 
 void resultView::update(int32 level,Texture tex) {
@@ -44,6 +44,18 @@ void resultView::update(int32 level,Texture tex) {
 	if (m_titleRect.leftClicked())
 	{
 		m_titlePressed = true;
+	}
+	m_retryTransition.update(m_retryRect.mouseOver());
+	m_titleTransition.update(m_titleRect.mouseOver());
+
+
+	if (m_retryRect.mouseOver())
+	{
+		Cursor::RequestStyle(CursorStyle::Hand);
+	}
+	if (m_titleRect.mouseOver())
+	{
+		Cursor::RequestStyle(CursorStyle::Hand);
 	}
 }
 

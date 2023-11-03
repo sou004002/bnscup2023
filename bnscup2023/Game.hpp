@@ -6,6 +6,7 @@
 #include "FoodBtn.hpp"
 #include "Garbage.hpp"
 #include "Fish.hpp"
+#include "resultView.hpp"
 #include "Mousecursor.h"
 class Game : public App::Scene
 {
@@ -14,6 +15,7 @@ public:
 	Game(const InitData& init);
 	void update() override;
 	void draw() const override;
+	void retry();
 
 private:
 	const Texture m_backGround = Texture(U"dotImages/bg.svg");
@@ -36,6 +38,8 @@ private:
 	const Vec2 m_levelIconPos{ 10,10 };
 	const double m_levelIconSize = 0.3;
 	const int32 m_initialLevel = 1;
+	int32 m_level = m_initialLevel;
+	String m_charaName = U"blueFish";
 	LvIcon m_levelIcon{ m_levelIconPos,m_levelIconSize,m_initialLevel };
 
 	const ColorF m_EXPColor{ 0, 0.851, 0.063 };
@@ -74,4 +78,8 @@ private:
 	Mousecursor m_cursor{ 200.0, 300.0, m_otete, m_ami, m_allow, m_aqua };
 	Array<Food> m_arrayFood; //Foodの配列を用意して、generateのたびに追加
 	double m_marginTime = 3.0;
+
+	const Texture m_blueFishTex = TextureAsset(U"blueFish");
+	resultView m_resultView{ m_level,m_blueFishTex,m_charaName };
+	bool m_isResult = false;
 };

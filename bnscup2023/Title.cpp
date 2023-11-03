@@ -32,7 +32,7 @@ void Title::update()
 
 void Title::draw() const
 {
-	Scene::SetBackground(ColorF{ 1});
+	Scene::SetBackground(ColorF{1});
 	TextureAsset(U"backGround").scaled(0.25).draw(Arg::bottomLeft(0,Scene::Height()));
 	for (auto& p : m_bubblePos)
 	{

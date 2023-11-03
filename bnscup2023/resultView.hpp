@@ -9,7 +9,7 @@ public:
 	Rect getRetryRect();
 	Rect getTitleRect();
 	void update(int32 level,Texture tex);
-	void draw();
+	void draw() const;
 	bool getRetryPressed();
 	bool getTitlePressed();
 
@@ -24,5 +24,9 @@ private:
 	bool m_retryPressed = false;
 	bool m_titlePressed = false;
 	String m_texName;
+	Transition m_retryTransition{ 0.4s,0.2s };
+	Transition m_titleTransition{ 0.4s,0.2s };
+
+
 
 };

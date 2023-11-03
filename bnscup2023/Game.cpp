@@ -9,6 +9,16 @@ Game::Game(const InitData& init)
 
 void Game::update()//値の更新を行う。drawしても描画されない
 {
+	if (m_isResult) {
+		m_resultView.update(m_level, m_blueFishTex);
+		if (m_resultView.getTitlePressed()) {
+			changeScene(State::Title);
+		}
+		if (m_resultView.getRetryPressed()) {
+			retry();
+		}
+		return;
+	}
 	ClearPrint();
 	m_accumulator += Scene::DeltaTime();
 	m_foodBtn.update();
@@ -90,10 +100,17 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	{
 		m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 30.0, m_dust);
 	}
+
+	m_resultView.update(m_level, m_blueFishTex);
+
+	if (MouseR.down()) {
+		m_isResult = true;
+	}
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
 {
+
 	TextureAsset(U"blackBorder").scaled(0.5).draw();
 	TextureAsset(U"blackBorder").scaled(0.5).draw((int32)(TextureAsset(U"blackBorder").width() / 2), -30);
 	m_aqua.init();
@@ -117,4 +134,15 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	}
 
 	m_cursor.draw();
+	if (m_isResult) {
+		m_resultView.draw();
+	}
+}
+
+void Game::retry()
+{
+	m_level = m_initialLevel;
+	m_charaName = U"blueFish";
+	m_isResult = false;
+	changeScene(State::Game);
 }
