@@ -57,10 +57,13 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	for (auto& i : m_arrayFood) {
 		i.move();
 		if (i.m_trashTime >= 1) {
-			Garbage g(30.0, m_dust, m_accumulator, 1);
-			g.putpoints(Vec2{ i.m_x, i.m_y });
-			m_garbages << g;
-			garbage_in_aq = garbage_in_aq + 1;
+			if (m_garbages.size() <= max_garbage_number)
+			{
+				Garbage g(30.0, m_dust, m_accumulator, 1);
+				g.putpoints(Vec2{ i.m_x, i.m_y });
+				m_garbages << g;
+				garbage_in_aq = garbage_in_aq + 1;
+			}
 		}
 		if (!i.m_eaten) {
 			if (m_fish1.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
@@ -81,6 +84,12 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	damage = guard - garbage_in_aq;
 	if (damage > 0) damage = 0;
 	m_hpBar.damage(abs(damage));
+
+	//全てのごみがなくなったら新たに生成する
+	if (m_garbages.size() == 0)
+	{
+		m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 30.0, m_dust);
+	}
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
