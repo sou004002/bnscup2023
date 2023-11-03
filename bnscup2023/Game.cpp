@@ -19,6 +19,13 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	for (auto& gab : m_garbages)
 	{
 		gab.changehitter(m_accumulator);
+		if (gab.gethitter()) {
+			if (gab.getcircle().intersects(m_cursor.m_image.getCircle().movedBy(m_cursor.m_image.getPoint())))
+			{
+				gab.set_del(gab.getcircle().leftClicked());
+			}
+		}
+		
 	}
 	m_fish1.move();
 	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
@@ -59,7 +66,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_eaten); });
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 	m_cursor.move(m_aqua_pos.x, m_aqua_pos.x + m_aqua_w, m_aqua_pos.y + m_aqua_h);
-
+	m_garbages.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
@@ -77,7 +84,7 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	for (auto& gab : m_garbages)
 	{
 		if (gab.gethitter()) {
-			gab.draw();
+			gab.draw(gab.getcircle().intersects(m_cursor.m_image.getCircle().movedBy(m_cursor.m_image.getPoint())));
 		}
 	}
 

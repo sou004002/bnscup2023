@@ -1,13 +1,22 @@
 ﻿#include "stdafx.h"
 #include "Garbage.hpp"
 
-void Garbage::draw() const
+void Garbage::draw(bool c) const
 {
 	//分割数
 	int32 div = 4;
 	int32 tex_w = g_texture.width() / div;
-	this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p);
-	this->g_circle.drawFrame();
+	if (c == true)
+	{
+		//Print << U"ハイライト";
+		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p);
+	}
+	else
+	{
+		//Print << U"通常";
+		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p, ColorF{0.0, 1.0, 1.0 , 0.8});
+	}
+	//this->g_circle.drawFrame();
 }
 
 void Garbage::putpoints(Vec2 pos)
@@ -32,7 +41,7 @@ bool Garbage::gethitter() const
 	return judge;
 }
 
-Circle Garbage::getcircle()
+Circle Garbage::getcircle() const
 {
 	return this->g_circle;
 }
@@ -67,5 +76,29 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 	}
 
 	return garbage;
+}
+
+void Garbage::set_del(bool x)
+{
+	this->g_del = x;
+}
+
+bool Garbage::get_del() const
+{
+	return this->g_del;
+}
+
+Garbage& Garbage::operator=(const Garbage& garbage)
+{
+	g_x = garbage.g_x;
+	g_p = garbage.g_p;
+	g_scale = garbage.g_scale;
+	g_texture = garbage.g_texture;
+	g_time = garbage.g_time;
+	g_hit = garbage.g_hit;
+	g_Cut = garbage.g_Cut;
+	g_circle = garbage.g_circle;
+	g_del = garbage.g_del;
+	return *this;
 }
 
