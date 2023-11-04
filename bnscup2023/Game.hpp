@@ -27,7 +27,7 @@ private:
 	const Aquarium m_aqua{ m_backGround,m_aqua_pos,m_aqua_w,m_aqua_h,m_aqua_frameThick};
 
 	const ColorF m_HPColor{ 0.8,0.2,0.2 };
-	const int32 m_initialHP = 5000;
+	const int32 m_initialHP = 30000;
 	const int32 m_HPBarPosX = 200;
 	const int32 m_HPBarPosY = 30;
 	const int32 m_HPBarWidth = 470;
@@ -97,7 +97,7 @@ private:
 
 		explicit RingEffect(const Vec2& pos)
 			: m_pos{ pos }
-			, m_color{ RandomColorF() } {}
+			, m_color{ Palette::Mediumseagreen } {}
 
 		bool update(double t) override
 		{

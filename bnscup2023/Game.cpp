@@ -46,10 +46,10 @@ void Game::update()//値の更新を行う。drawしても描画されない
 					}
 
 				}
-			}
-			if (gab.get_del() == false)
-			{
-				garbage_in_aq = garbage_in_aq + 1;
+				if (gab.get_del() == false)
+				{
+					garbage_in_aq = garbage_in_aq + 1;
+				}
 			}
 		}
 		
@@ -99,6 +99,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	{
 		m_EXP = 0;
 		m_levelIcon.levelUp();
+		effect.add<RingEffect>(Vec2{ m_fish.getPoint().x + 50, m_fish.getPoint().y + 20 });
 		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);
 		//Print << (m_levelIcon.getLevel() * 0.8) * m_maxEXP;
 	}
@@ -151,8 +152,6 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	if (m_isResult) {
 		m_resultView.draw();
 	}
-	// エフェクトを追加する
-	effect.add<RingEffect>(Cursor::Pos());
 
 	//エフェクトの更新
 	effect.update();
