@@ -9,37 +9,43 @@ Game::Game(const InitData& init)
 
 void Game::update()//値の更新を行う。drawしても描画されない
 {
+	//リザルトフラグが経っていたら
 	if (m_isResult) {
-		m_resultView.update(m_level, m_blueFishTex);
+		m_resultView.update(m_level, m_blueFishTex);//リザルトビューの更新
 		if (m_resultView.getTitlePressed()) {
 			changeScene(State::Title);
 		}
 		if (m_resultView.getRetryPressed()) {
 			retry();
 		}
-		return;
+		return;//他の挙動は行わない
 	}
+
 	ClearPrint();
 	m_accumulator += Scene::DeltaTime();
 	m_foodBtn.update();
-	//if (MouseR.down())
-	//{
-	//	levelIcon.levelUp();
-	//}
 
 	//水槽内のごみの数の初期化
 	garbage_in_aq = 0;
 	for (auto& gab : m_garbages)
 	{
 		gab.changehitter(m_accumulator);
-		if (gab.gethitter()) {
-			if (gab.getcircle().intersects(m_cursor.m_image.getCircle().movedBy(m_cursor.m_image.getPoint())))
-			{
-				gab.set_del(gab.getcircle().leftClicked());
-			}
-			if (gab.get_del() == false)
-			{
-				garbage_in_aq = garbage_in_aq + 1;
+		if (gab.gethitter()) {//表示されてて
+			if (!m_foodBtn.getPressed()) {
+				if (gab.getcircle().mouseOver())
+				{
+					if (gab.getcircle().leftClicked())
+					{
+						gab.set_hit(false);
+						gab.set_time(Garbage::coolTime + Garbage::time);
+						Garbage::time = Garbage::coolTime + Garbage::time;
+					}
+
+				}
+				if (gab.get_del() == false)
+				{
+					garbage_in_aq = garbage_in_aq + 1;
+				}
 			}
 		}
 		
@@ -69,8 +75,8 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		if (i.m_trashTime >= 1) {
 			if (m_garbages.size() <= max_garbage_number)
 			{
-				Garbage g(30.0, m_dust, m_accumulator, 1);
-				g.putpoints(Vec2{ i.m_x, i.m_y });
+				Garbage g(70.0, m_dust, m_accumulator, 1);
+				g.putpoints(Vec2{ i.m_x, i.m_y-10 });
 				m_garbages << g;
 				garbage_in_aq = garbage_in_aq + 1;
 			}
@@ -96,10 +102,10 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	m_hpBar.damage(abs(damage));
 
 	//全てのごみがなくなったら新たに生成する
-	if (m_garbages.size() == 0)
-	{
-		m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 30.0, m_dust);
-	}
+	//if (m_garbages.size() == 0)
+	//{
+	//	m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 70.0, m_dust,m_accumulator,Garbage::coolTime);
+	//}
 
 	m_resultView.update(m_level, m_blueFishTex);
 
@@ -125,7 +131,8 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	for (auto& gab : m_garbages)
 	{
 		if (gab.gethitter()) {
-			gab.draw(gab.getcircle().intersects(m_cursor.m_image.getCircle().movedBy(m_cursor.m_image.getPoint())));
+			gab.draw(gab.getcircle().mouseOver() && !m_foodBtn.getPressed());
+			//Print << gab.get_time();
 		}
 	}
 
