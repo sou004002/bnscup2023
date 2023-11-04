@@ -27,7 +27,7 @@ private:
 	const Aquarium m_aqua{ m_backGround,m_aqua_pos,m_aqua_w,m_aqua_h,m_aqua_frameThick};
 
 	const ColorF m_HPColor{ 0.8,0.2,0.2 };
-	const int32 m_initialHP = 400;
+	const int32 m_initialHP = 5000;
 	const int32 m_HPBarPosX = 200;
 	const int32 m_HPBarPosY = 30;
 	const int32 m_HPBarWidth = 470;
@@ -65,8 +65,6 @@ private:
 	Array<Garbage> m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 70.0, m_dust,0,Garbage::coolTime);
 	int32 max_garbage_number = 100;
 	int32 garbage_in_aq = 0;
-	int32 guard = 10;
-	int32 damage = 0;
 
 	const Image m_blueFishImage{ U"dotImages/blueFish.svg" };
 	Fish m_fish1{ 200, 300, 100.0, m_blueFishImage, 2, m_aqua };
@@ -82,4 +80,28 @@ private:
 	const Texture m_blueFishTex = TextureAsset(U"blueFish");
 	resultView m_resultView{ m_level,m_blueFishTex,m_charaName };
 	bool m_isResult = false;
+
+	//effect
+	struct RingEffect : IEffect
+	{
+		Vec2 m_pos;
+
+		ColorF m_color;
+
+		explicit RingEffect(const Vec2& pos)
+			: m_pos{ pos }
+			, m_color{ RandomColorF() } {}
+
+		bool update(double t) override
+		{
+			// イージング
+			const double e = EaseOutExpo(t);
+
+			Circle{ m_pos, (e * 100) }.drawFrame((20.0 * (1.0 - e)), m_color);
+
+			return (t < 1.0);
+		}
+	};
+
+	Effect effect;
 };
