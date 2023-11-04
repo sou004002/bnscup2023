@@ -6,6 +6,7 @@
 #include "FoodBtn.hpp"
 #include "Garbage.hpp"
 #include "Fish.hpp"
+#include "JerryFish.hpp"
 #include "resultView.hpp"
 #include "Mousecursor.h"
 class Game : public App::Scene
@@ -18,7 +19,7 @@ public:
 	void retry();
 
 private:
-	const Texture m_backGround = Texture(U"dotImages/bg.svg");
+	const Texture m_backGround = TextureAsset(U"bg");
 	const int32 m_aqua_frameThick = 5;
 	const int32 m_aqua_w = Scene::Width() - m_aqua_frameThick * 2;
 	const int32 m_aqua_h = 400;
@@ -69,17 +70,13 @@ private:
 	int32 max_garbage_number = 100;
 	int32 garbage_in_aq = 0;
 
-	const Image m_blueFishImage{ U"dotImages/blueFish.svg" };
-	const Image m_whiteFishImage{ U"dotImages/whiteFish.svg" };
-	const Image m_tatsuImage{ U"dotImages/tatsu.svg" };
-	const Image m_turtleImage{ U"dotImages/turtle.svg" };
-	const Image m_jerryFishImage{ U"dotImages/jerryFish.svg" };
-	Fish m_fish{ 200, 300, 100.0, TextureAsset(U"blueFish"), 2, m_aqua};
+	Fish m_blueFish{ 200, 300, 100.0, TextureAsset(U"blueFish"), 2, m_aqua };
+	Fish m_whiteFish{ 200, 300, 100.0, TextureAsset(U"whiteFish"), 2, m_aqua };
+	Fish m_tatsu{ 200, 300, 100.0, TextureAsset(U"tatsu"), 2, m_aqua };
+	Fish m_turtle{ 200, 300, 100.0, TextureAsset(U"turtle"), 4, m_aqua };
+	JerryFish m_jerryFish{ 200, 300, 100.0, TextureAsset(U"jerryFish"), 2, m_aqua};
 
 	//マウスカーソル
-	const Image m_otete{ U"dotImages/foodFinger.svg" };
-	const Image m_ami{ U"dotImages/ami.svg" };
-	const Image m_allow{ U"dotImages/cursor.svg" };
 	Mousecursor m_cursor{ 200.0, 300.0, TextureAsset(U"foodFinger"),
 		TextureAsset(U"ami"), TextureAsset(U"cursor"), m_aqua };
 	Array<Food> m_arrayFood; //Foodの配列を用意して、generateのたびに追加

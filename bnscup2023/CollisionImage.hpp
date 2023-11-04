@@ -32,6 +32,8 @@ public:
 	Circle getCircle() const { return m_circle; }
 	Vec2 getCircleCenter() const { return m_circleCenter; }
 
+	void setTexture(Texture t) { m_texture = t; }
+
 protected:
 	Vec2 m_point;
 	double m_scale;
