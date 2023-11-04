@@ -42,10 +42,10 @@ void Game::update()//値の更新を行う。drawしても描画されない
 					}
 
 				}
-				if (gab.get_del() == false)
-				{
-					garbage_in_aq = garbage_in_aq + 1;
-				}
+			}
+			if (gab.get_del() == false)
+			{
+				garbage_in_aq = garbage_in_aq + 1;
 			}
 		}
 		
