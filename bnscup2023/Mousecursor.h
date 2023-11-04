@@ -6,7 +6,7 @@
 class Mousecursor
 {
 public:
-	Mousecursor(double x, double y, Image otete, Image ami, Image allow, Aquarium aq)
+	Mousecursor(double x, double y, Texture otete, Texture ami, Texture allow, Aquarium aq)
 		:m_x(x), m_y(y), m_feed(true), m_pickGarbage(false),
 		m_otete(m_x, m_y, 50.0, otete, aq),
 		m_net(m_x, m_y, 70.0, ami, aq),

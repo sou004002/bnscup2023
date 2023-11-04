@@ -18,6 +18,7 @@ public:
 	int32 getMaxHP() const;
 	double getHPRatio() const;
 	void setHP(int32 hp);
+	void setMaxHP(int32 hp);
 	void damage(int32 damage);
 	void heal(int32 heal);
 
