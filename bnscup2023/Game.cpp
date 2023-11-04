@@ -9,6 +9,7 @@ Game::Game(const InitData& init)
 
 void Game::update()//値の更新を行う。drawしても描画されない
 {
+	//Cursor::RequestStyle(CursorStyle::Hidden);
 	//リザルトフラグが経っていたら
 	if (m_isResult) {
 		m_resultView.update(m_level, m_blueFishTex);//リザルトビューの更新
@@ -174,10 +175,8 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	}
 	for (auto& gab : m_garbageFromFood)
 	{
-		Print << U"kuso";
 		if (gab.gethitter()) {
 			gab.draw(gab.getcircle().mouseOver() && !m_foodBtn.getPressed());
-			Print << U"kuso";
 		}
 	}
 
@@ -187,9 +186,20 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 		i.draw();
 	}
 
-	m_cursor.draw();
+	if (m_foodBtn.getRect().mouseOver())
+	{
+		TextureAsset(U"finger").resized(60).draw(Cursor::Pos().x - 20, Cursor::Pos().y - 5);
+	}
 	if (m_isResult) {
 		m_resultView.draw();
+		if (m_resultView.getRetryRect().mouseOver() || m_resultView.getTitleRect().mouseOver())
+		{
+			TextureAsset(U"finger").resized(60).draw(Cursor::Pos().x-20,Cursor::Pos().y-5);
+		}
+		else
+		{
+			TextureAsset(U"cursor").resized(60).draw(Cursor::Pos().x - 20, Cursor::Pos().y - 13);
+		}
 	}
 
 	//エフェクトの更新

@@ -14,6 +14,7 @@ void Main()
 	TextureAsset::Register(U"foodFinger", U"dotImages/foodFinger.svg");
 	TextureAsset::Register(U"ami", U"dotImages/ami.svg");
 	TextureAsset::Register(U"cursor", U"dotImages/cursor.svg");
+	TextureAsset::Register(U"finger", U"dotImages/finger.svg");
 	FontAsset::Register(U"MiddleFont", FontMethod::MSDF, 30, U"example/font/INVASION2000.TTF", FontStyle::Bitmap);
 	FontAsset::Register(U"MiddleFontJap", FontMethod::MSDF, 30, U"example/font/misaki_gothic_2nd.ttf", FontStyle::Bitmap);
 	const Font font{ 50 };

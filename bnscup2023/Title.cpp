@@ -19,10 +19,8 @@ void Title::update()
 
 	m_startTransition.update(m_startButton.mouseOver());
 
-	if (m_startButton.mouseOver())
-	{
-		Cursor::RequestStyle(CursorStyle::Hand);
-	}
+	setIsHand(m_startButton.mouseOver());
+
 
 	if (m_startButton.leftClicked())
 	{
@@ -45,4 +43,12 @@ void Title::draw() const
 	m_startButton.draw(ColorF{ 1.0,m_startTransition.value() }).drawFrame(2);
 
 	FontAsset(U"MiddleFont")(U"Start").drawAt(m_startButton.center(), ColorF{ 1-m_startTransition.value() });
+	if (getIsHand())
+	{
+		TextureAsset(U"finger").resized(60).draw(Cursor::Pos().x - 20, Cursor::Pos().y - 5);
+	}
+	else
+	{
+		TextureAsset(U"cursor").resized(60).draw(Cursor::Pos().x - 20, Cursor::Pos().y - 13);
+	}
 }

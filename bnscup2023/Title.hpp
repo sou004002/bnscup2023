@@ -10,6 +10,8 @@ public:
 	void update() override;
 
 	void draw() const override;
+	bool getIsHand() const { return m_isHand; }
+	void setIsHand(bool b) {m_isHand=b ; }
 
 private:
 
@@ -20,4 +22,5 @@ private:
 	,{Random(50, (int)Scene::Width() - 50),Random((int)Scene::Height(),(int)Scene::Height() * 2)}
 	,{Random(50, (int)Scene::Width() - 50),Random((int)Scene::Height(),(int)Scene::Height() * 2)} }; //Foodの配列を用意して、generateのたびに追加
 	double m_accumulator = 0.0;
+	bool m_isHand = false;
 };

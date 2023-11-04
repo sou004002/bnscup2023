@@ -12,10 +12,7 @@ Vec2 FoodBtn::getPos() {
 void FoodBtn::update() {
 	const bool mouseOver = m_rect.mouseOver();
 
-	if (mouseOver)
-	{
-		Cursor::RequestStyle(CursorStyle::Hand);
-	}
+
 	if (m_rect.leftClicked())
 	{
 		m_pressed = !m_pressed;

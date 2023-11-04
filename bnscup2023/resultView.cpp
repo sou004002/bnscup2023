@@ -1,10 +1,10 @@
 ﻿#include "stdafx.h"
 #include "resultView.hpp"
 
-Rect resultView::getRetryRect() {
+Rect resultView::getRetryRect() const{
 	return m_retryRect;
 }
-Rect resultView::getTitleRect() {
+Rect resultView::getTitleRect() const{
 	return m_titleRect;
 }
 
@@ -33,10 +33,10 @@ void resultView::update(int32 level,Texture tex) {
 	m_level = level;
 	m_tex = tex;
 	const bool MouseOver = m_retryRect.mouseOver() || m_titleRect.mouseOver();
-	if (MouseOver)
-	{
-		Cursor::RequestStyle(CursorStyle::Hand);
-	}
+	//if (MouseOver)
+	//{
+	//	TextureAsset(U"finger").draw(Cursor::Pos());
+	//}
 	if (m_retryRect.leftClicked())
 	{
 		m_retryPressed = true;
@@ -49,14 +49,14 @@ void resultView::update(int32 level,Texture tex) {
 	m_titleTransition.update(m_titleRect.mouseOver());
 
 
-	if (m_retryRect.mouseOver())
-	{
-		Cursor::RequestStyle(CursorStyle::Hand);
-	}
-	if (m_titleRect.mouseOver())
-	{
-		Cursor::RequestStyle(CursorStyle::Hand);
-	}
+	//if (m_retryRect.mouseOver())
+	//{
+	//	Cursor::RequestStyle(CursorStyle::Hand);
+	//}
+	//if (m_titleRect.mouseOver())
+	//{
+	//	Cursor::RequestStyle(CursorStyle::Hand);
+	//}
 }
 
 bool resultView::getRetryPressed()

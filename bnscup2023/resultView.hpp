@@ -6,8 +6,8 @@ class resultView
 public:
 	resultView(int32 level,Texture img,String texName)
 		:m_level(level) ,m_tex(img),m_texName(texName){};
-	Rect getRetryRect();
-	Rect getTitleRect();
+	Rect getRetryRect()const;
+	Rect getTitleRect()const;
 	void update(int32 level,Texture tex);
 	void draw() const;
 	bool getRetryPressed();

@@ -13,6 +13,7 @@ public:
 	Vec2 getPos();
 	bool getPressed() const;
 	void update();
+	Rect getRect() const{ return m_rect; }
 	
 
 private:
