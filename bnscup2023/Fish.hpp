@@ -5,12 +5,12 @@
 class Fish : public CollisionImage
 {
 public:
-	Fish(int32 x, int32 y, double w, Image i, int32 ac, Aquarium aq)
-		:CollisionImage(x, y, w * 2, i, aq),
+	Fish(int32 x, int32 y, double w, Texture t, int32 ac, Aquarium aq)
+		:CollisionImage(x, y, w * 2, t, aq),
 		m_to({ x, y }), m_v({ 0, 0 }), m_time(0.0), m_animNum(ac),
 		m_circle({ 0, 0, m_width / 8 }), m_circleCenter({ x + m_width / 16, y + m_height / 2 }) {};
-	Fish(Vec2 p, double w, Image i, int32 ac, Aquarium aq)
-		:CollisionImage(p, w * 2, i, aq),
+	Fish(Vec2 p, double w, Texture t, int32 ac, Aquarium aq)
+		:CollisionImage(p, w * 2, t, aq),
 		m_to(p), m_v({ 0, 0 }), m_time(0.0), m_animNum(ac),
 		m_circle({ 0, 0, m_width / 8 }), m_circleCenter({ p.x + m_width / 16, p.y + m_height / 2 }) {};
 

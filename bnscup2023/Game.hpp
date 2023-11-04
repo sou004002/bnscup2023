@@ -40,11 +40,13 @@ private:
 	const int32 m_initialLevel = 1;
 	int32 m_level = m_initialLevel;
 	String m_charaName = U"blueFish";
-	LvIcon m_levelIcon{ m_levelIconPos,m_levelIconSize,m_initialLevel };
+	LvIcon m_levelIcon{ m_levelIconPos,m_levelIconSize,m_level };
 
 	const ColorF m_EXPColor{ 0, 0.851, 0.063 };
 	const int32 m_initialEXP = 0;
-	HPBar m_expBar{ m_EXPColor,m_initialEXP };
+	const int32 m_maxEXP = 30;
+	int32 m_EXP = m_initialEXP;
+	HPBar m_expBar{ m_EXPColor,m_maxEXP };
 	const int32 m_EXPBarPosX = 100;
 	const int32 m_EXPBarPosY = 30 + m_HPBarPosY + m_HPBarHeight;
 	const int32 m_EXPBarWidth = 470 + (m_HPBarPosX - m_EXPBarPosX);
@@ -67,13 +69,18 @@ private:
 	int32 garbage_in_aq = 0;
 
 	const Image m_blueFishImage{ U"dotImages/blueFish.svg" };
-	Fish m_fish1{ 200, 300, 100.0, m_blueFishImage, 2, m_aqua };
+	const Image m_whiteFishImage{ U"dotImages/whiteFish.svg" };
+	const Image m_tatsuImage{ U"dotImages/tatsu.svg" };
+	const Image m_turtleImage{ U"dotImages/turtle.svg" };
+	const Image m_jerryFishImage{ U"dotImages/jerryFish.svg" };
+	Fish m_fish{ 200, 300, 100.0, TextureAsset(U"blueFish"), 2, m_aqua};
 
 	//マウスカーソル
 	const Image m_otete{ U"dotImages/foodFinger.svg" };
 	const Image m_ami{ U"dotImages/ami.svg" };
 	const Image m_allow{ U"dotImages/cursor.svg" };
-	Mousecursor m_cursor{ 200.0, 300.0, m_otete, m_ami, m_allow, m_aqua };
+	Mousecursor m_cursor{ 200.0, 300.0, TextureAsset(U"foodFinger"),
+		TextureAsset(U"ami"), TextureAsset(U"cursor"), m_aqua };
 	Array<Food> m_arrayFood; //Foodの配列を用意して、generateのたびに追加
 	double m_marginTime = 3.0;
 

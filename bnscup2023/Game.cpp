@@ -54,7 +54,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		}
 		
 	}
-	m_fish1.move();
+	m_fish.move();
 	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
 		if (m_cursor.m_feed && m_aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= m_aqua_pos.x + m_aqua_w) {
 			m_arrayFood.push_back(Food(Cursor::Pos().x, m_aqua_pos, m_aqua_w, m_aqua_h, m_aqua)); //ここで配列にこれを追加したい
@@ -86,14 +86,23 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			}
 		}
 		if (!i.m_eaten) {
-			if (m_fish1.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
+			if (m_fish.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
 				i.m_eaten = true;
 				Print << U"umai";
 				//経験値を増加させる。
+				m_EXP+=10;
 			}
 		}
 		else { i.m_eaten = false; }//冗長に思えるかもしれないけど必要です。
 	}
+	if (m_EXP >=m_expBar.getMaxHP())
+	{
+		m_EXP = 0;
+		m_levelIcon.levelUp();
+		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);
+		//Print << (m_levelIcon.getLevel() * 0.8) * m_maxEXP;
+	}
+	m_expBar.setHP(m_EXP);
 	
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_eaten); });
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
@@ -133,7 +142,7 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 		}
 	}
 
-	m_fish1.draw();
+	m_fish.draw();
 	for (auto& i : m_arrayFood) {
 		i.draw();
 	}
