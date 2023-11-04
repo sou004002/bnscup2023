@@ -44,11 +44,16 @@ void Game::update()//値の更新を行う。drawしても描画されない
 						Garbage::time = Garbage::coolTime + Garbage::time;
 						garbage_in_aq = garbage_in_aq - 1;
 					}
-				}	
+
+				}
+				if (gab.get_del() == false)
+				{
+					garbage_in_aq = garbage_in_aq + 1;
+				}
 			}
 		}
+		
 	}
-
 	m_fish1.move();
 	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
 		if (m_cursor.m_feed && m_aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= m_aqua_pos.x + m_aqua_w) {

@@ -8,17 +8,17 @@ void Mousecursor::move(double min, double max, double maxY) {
 		m_y = 100;//投下位置（y座標）
 	}
 	else if (m_pickGarbage) {
-		m_x = Cursor::Pos().x - 15;//30はズレの修正
-		m_y = Cursor::Pos().y - 40;
-		//if (m_image.getScale() == m_allow.getScale()) {
-		//	m_x += 10;
-		//	m_y += 20;
-		//}
+		m_x = Cursor::Pos().x - 17;//画像の位置微調整
+		m_y = Cursor::Pos().y - 42;
 		if (min <= m_x && m_x <= max && 150 <= m_y && m_y <= maxY) {//ここの数字は水面の高さ
 			m_image = m_net;
 		}
 		else {
 			m_image = m_allow;
+		}
+		if (m_image.getScale() == m_allow.getScale()) {
+			m_x -= 5;
+			m_y += 28;
 		}
 	}
 	m_image.move(Vec2({ m_x, m_y }));
