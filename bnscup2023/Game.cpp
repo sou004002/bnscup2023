@@ -100,6 +100,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	damage = guard - garbage_in_aq;
 	if (damage > 0) damage = 0;
 	m_hpBar.damage(abs(damage));
+	//Print << damage;
 
 	//全てのごみがなくなったら新たに生成する
 	//if (m_garbages.size() == 0)
@@ -112,6 +113,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	if (MouseR.down()) {
 		m_isResult = true;
 	}
+	
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
