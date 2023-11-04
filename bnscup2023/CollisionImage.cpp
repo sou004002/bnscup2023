@@ -9,6 +9,7 @@ void CollisionImage::draw() const
 	//	.drawFrame(2, Palette::Yellow);
 
 	m_texture.scaled(m_scale).draw(m_point);
+	//m_circle.draw().movedBy(m_point);
 }
 
 bool CollisionImage::isCollision(const CollisionImage& ci) const
