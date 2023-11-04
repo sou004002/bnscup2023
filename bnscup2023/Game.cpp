@@ -137,7 +137,7 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 		m_resultView.draw();
 	}
 	// エフェクトを追加する
-	effect.add<RingEffect>(Cursor::Pos());
+	//effect.add<RingEffect>(Cursor::Pos());
 
 	//エフェクトの更新
 	effect.update();
