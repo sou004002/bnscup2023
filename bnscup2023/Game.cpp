@@ -147,18 +147,29 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	{
 		m_EXP = 0;
 		m_levelIcon.levelUp();
-		effect.add<RingEffect>(Vec2{ m_fish.getPoint().x + 50, m_fish.getPoint().y + 20 });
 		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);
 		//Print << (m_levelIcon.getLevel() * 0.8) * m_maxEXP;
 
 		if (m_levelIcon.getLevel() == 2)
+		{
 			m_whiteFish.move(m_blueFish.getPoint());
+			effect.add<RingEffect>(Vec2{ m_blueFish.getPoint().x + 50, m_blueFish.getPoint().y + 20 });
+		}
 		else if (m_levelIcon.getLevel() == 3)
+		{
 			m_tatsu.move(m_whiteFish.getPoint());
+			effect.add<RingEffect>(Vec2{ m_whiteFish.getPoint().x + 50, m_whiteFish.getPoint().y + 20 });
+		}
 		else if (m_levelIcon.getLevel() == 4)
+		{
 			m_turtle.move(m_tatsu.getPoint());
+			effect.add<RingEffect>(Vec2{ m_tatsu.getPoint().x + 50, m_tatsu.getPoint().y + 20 });
+		}
 		else if (m_levelIcon.getLevel() == 5)
+		{
 			m_jerryFish.move(m_turtle.getPoint());
+			effect.add<RingEffect>(Vec2{ m_turtle.getPoint().x + 50, m_turtle.getPoint().y + 20 });
+		}
 	}
 	m_expBar.setHP(m_EXP);
 	
