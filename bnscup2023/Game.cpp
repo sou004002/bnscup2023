@@ -30,8 +30,11 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	for (auto& gab : m_garbages)
 	{
 		gab.changehitter(m_accumulator);
-		if (gab.gethitter()) {//表示されてて
-			if (!m_foodBtn.getPressed()) {
+		if (gab.gethitter())
+		{//表示されてて
+			garbage_in_aq = garbage_in_aq + 1;
+			if (!m_foodBtn.getPressed())
+			{
 				if (gab.getcircle().mouseOver())
 				{
 					if (gab.getcircle().leftClicked())
@@ -39,6 +42,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 						gab.set_hit(false);
 						gab.set_time(Garbage::coolTime + Garbage::time);
 						Garbage::time = Garbage::coolTime + Garbage::time;
+						garbage_in_aq = garbage_in_aq - 1;
 					}
 
 				}
@@ -97,15 +101,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	m_garbages.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
 
 	//ごみの数によってダメージ
-	damage = guard - garbage_in_aq;
-	if (damage > 0) damage = 0;
-	m_hpBar.damage(abs(damage));
-
-	//全てのごみがなくなったら新たに生成する
-	//if (m_garbages.size() == 0)
-	//{
-	//	m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 70.0, m_dust,m_accumulator,Garbage::coolTime);
-	//}
+	m_hpBar.damage(garbage_in_aq);
 
 	m_resultView.update(m_level, m_blueFishTex);
 
@@ -145,6 +141,11 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	if (m_isResult) {
 		m_resultView.draw();
 	}
+	// エフェクトを追加する
+	effect.add<RingEffect>(Cursor::Pos());
+
+	//エフェクトの更新
+	effect.update();
 }
 
 void Game::retry()
