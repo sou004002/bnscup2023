@@ -10,17 +10,24 @@ public:
 	Garbage(double x, double s, Texture i, double z, int32 ac):
 		g_x(x), g_p({ x,0 }), g_scale(s), g_texture(i), g_time(z), g_hit(false), g_Cut(ac) {};
 
+
+
 	void draw(bool c) const;
 	void putpoints(Vec2 pos);
 	void changehitter(double t);
 	bool gethitter() const;
-	static Array<Garbage> GenerateRandomPoints(const Rect& rect,
-		double radius, double size, Texture tex, bool clip = true);
 
+	static inline  double coolTime = 3.0;
+	static inline double time = 0;
+	static Array<Garbage> GenerateRandomPoints(const Rect& rect,
+		double radius, double size, Texture tex,double speed,bool clip = true);
 	Circle getcircle() const;
 
 	void set_del(bool x);
 	bool get_del() const ;
+	void set_hit(bool x);
+	double get_time() const;
+	void set_time(double t) ;
 	Garbage& operator=(const Garbage&);
 
 private:
@@ -29,8 +36,9 @@ private:
 	double g_scale;
 	Texture g_texture;
 	double g_time;
-	bool g_hit;
+	bool g_hit;//trueだったら表示
 	int32 g_Cut;
-	Circle g_circle;
+	Circle g_circle={g_p,50};
 	bool g_del = false;
+	double m_coolTime = 3.0;
 };

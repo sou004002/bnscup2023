@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
 #include "Garbage.hpp"
 
+
+//double time = 0;
 void Garbage::draw(bool c) const
 {
 	//分割数
@@ -9,22 +11,30 @@ void Garbage::draw(bool c) const
 	if (c == true)
 	{
 		//Print << U"ハイライト";
-		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p);
+		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p, ColorF{1.0, 0.7});
+		//できたら網を傾ける
 	}
 	else
 	{
 		//Print << U"通常";
-		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p, ColorF{0.0, 1.0, 1.0 , 0.8});
+		this->g_texture(tex_w * this->g_Cut, 0, tex_w, g_texture.height()).resized(this->g_scale).drawAt(this->g_p);
 	}
-	//this->g_circle.drawFrame();
+	/*this->g_circle.drawFrame();*/
 }
 
 void Garbage::putpoints(Vec2 pos)
 {
-	int32 radius = 7;
+	int32 radius;
 	this->g_p = pos;
 	this->g_x = pos.x;
-	this->g_circle =  Circle { pos, radius };
+	if (g_Cut == 2 || g_Cut==3) {
+		this->g_circle = Circle{ pos, g_scale*0.3};
+	}
+	else {
+		this->g_circle = Circle{ pos, g_scale*0.4};
+
+	}
+	
 }
 
 void Garbage::changehitter(double t)
@@ -46,12 +56,10 @@ Circle Garbage::getcircle() const
 	return this->g_circle;
 }
 
-Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Texture tex, bool clip)
+Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Texture tex,double speed,bool clip)
 {
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
-	double time = 0.0;
-	double cooltime = 3.0;
 	int32 count = 1;
 
 	for (const auto& point : pd.getPoints())
@@ -66,12 +74,12 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 		gab.putpoints(pos);
 		garbage << gab;
 		if (count % 10 == 0) {
-			cooltime -= 0.5;
+			coolTime -= 0.5;
 		}
-		if (cooltime <= 0) {
-			cooltime = 0.1;
+		if (coolTime <= 1.5) {
+			coolTime = 1.5;
 		}
-		time += cooltime;
+		time += coolTime;
 		count += 1;
 	}
 
@@ -86,6 +94,17 @@ void Garbage::set_del(bool x)
 bool Garbage::get_del() const
 {
 	return this->g_del;
+}
+void Garbage::set_hit(bool x)
+{
+	this->g_hit = x;
+}
+double Garbage::get_time() const
+{
+	return this->g_time;
+}
+void Garbage::set_time(double t) {
+	this->g_time = t;
 }
 
 Garbage& Garbage::operator=(const Garbage& garbage)
