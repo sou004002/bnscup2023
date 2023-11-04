@@ -30,6 +30,10 @@ void HPBar::setHP(int32 hp) {
 	m_currentHP = Clamp(hp, 0, m_maxHP);
 }
 
+void HPBar::setMaxHP(int32 hp) {
+	m_maxHP = hp;
+}
+
 void HPBar::damage(int32 damage) {
 	m_currentHP = Clamp((m_currentHP - damage), 0, m_maxHP);
 }
