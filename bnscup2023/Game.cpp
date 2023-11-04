@@ -52,8 +52,36 @@ void Game::update()//値の更新を行う。drawしても描画されない
 				}
 			}
 		}
-		
 	}
+	for (auto& gab : m_garbageFromFood)
+	{
+		for (auto& gab2 : m_garbageFromFood)
+		{
+			if (&gab!=&gab2)
+			{
+				if (!(gab.get_del() || gab2.get_del())) {
+					if (gab.getcircle().intersects(gab2.getcircle()))
+					{
+						gab.set_del(true);
+					}
+				}
+			}
+		}
+	}
+	for (auto& gab : m_garbageFromFood)
+	{
+		if (!m_foodBtn.getPressed())
+		{
+			if (gab.getcircle().mouseOver())
+			{
+				if (gab.getcircle().leftClicked())
+				{
+					gab.set_del(true);
+				}
+			}
+		}
+	}
+
 	m_fish.move();
 	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
 		if (m_cursor.m_feed && m_aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= m_aqua_pos.x + m_aqua_w) {
@@ -81,7 +109,8 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			{
 				Garbage g(70.0, m_dust, m_accumulator, 1);
 				g.putpoints(Vec2{ i.m_x, i.m_y-10 });
-				m_garbages << g;
+				g.set_hit(true);
+				m_garbageFromFood << g;
 				garbage_in_aq = garbage_in_aq + 1;
 			}
 		}
@@ -109,6 +138,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	m_arrayFood.remove_if([](const Food& food) { return (food.m_trashTime >= 1); });
 	m_cursor.move(m_aqua_pos.x, m_aqua_pos.x + m_aqua_w, m_aqua_pos.y + m_aqua_h);
 	m_garbages.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
+	m_garbageFromFood.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
 
 	//ごみの数によってダメージ
 	m_hpBar.damage(garbage_in_aq);
@@ -142,6 +172,15 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 			//Print << gab.get_time();
 		}
 	}
+	for (auto& gab : m_garbageFromFood)
+	{
+		Print << U"kuso";
+		if (gab.gethitter()) {
+			gab.draw(gab.getcircle().mouseOver() && !m_foodBtn.getPressed());
+			Print << U"kuso";
+		}
+	}
+
 
 	m_fish.draw();
 	for (auto& i : m_arrayFood) {

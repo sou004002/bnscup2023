@@ -65,6 +65,7 @@ private:
 	const Texture m_dust{ U"dotImages/garbageWithFrame.svg" };
 	double m_accumulator = 0.0;
 	Array<Garbage> m_garbages = Garbage::GenerateRandomPoints(m_SceneRect, 50.0, 70.0, m_dust,0,Garbage::coolTime);
+	Array<Garbage> m_garbageFromFood;
 	int32 max_garbage_number = 100;
 	int32 garbage_in_aq = 0;
 
