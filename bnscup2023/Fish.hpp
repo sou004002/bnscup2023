@@ -17,6 +17,7 @@ public:
 	void draw() const override;
 	void move();
 	bool isCollision(const CollisionImage& ci) const;
+	Circle getCircle() { return m_circle; }
 
 private:
 	Vec2 m_to;
