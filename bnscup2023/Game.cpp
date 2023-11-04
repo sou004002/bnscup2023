@@ -131,8 +131,8 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	for (auto& gab : m_garbages)
 	{
 		if (gab.gethitter()) {
-			gab.draw(gab.getcircle().mouseOver());
-			Print << gab.get_time();
+			gab.draw(gab.getcircle().mouseOver() && !m_foodBtn.getPressed());
+			//Print << gab.get_time();
 		}
 	}
 
