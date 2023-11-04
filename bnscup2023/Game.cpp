@@ -117,6 +117,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	if (MouseR.down()) {
 		m_isResult = true;
 	}
+	
 }
 
 void Game::draw() const //描画を行う。const関数のみ呼べる
