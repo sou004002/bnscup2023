@@ -11,7 +11,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 {
 	//リザルトフラグが経っていたら
 	if (m_isResult) {
-		m_resultView.update(m_level, m_blueFishTex);//リザルトビューの更新
+		m_resultView.update(m_levelIcon.getLevel(), m_blueFishTex);//リザルトビューの更新
 		if (m_resultView.getTitlePressed()) {
 			changeScene(State::Title);
 		}
@@ -54,7 +54,18 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		}
 		
 	}
-	m_fish.move();
+
+	if (m_levelIcon.getLevel() < 2)
+		m_blueFish.move();
+	else if (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3)
+		m_whiteFish.move();
+	else if (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4)
+		m_tatsu.move();
+	else if (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5)
+		m_turtle.move();
+	else if (5 <= m_levelIcon.getLevel())
+		m_jerryFish.move();
+
 	if (MouseL.down() && m_foodBtn.getPressed() && m_marginTime >= 1) {
 		if (m_cursor.m_feed && m_aqua_pos.x <= Cursor::Pos().x && Cursor::Pos().x <= m_aqua_pos.x + m_aqua_w) {
 			m_arrayFood.push_back(Food(Cursor::Pos().x, m_aqua_pos, m_aqua_w, m_aqua_h, m_aqua)); //ここで配列にこれを追加したい
@@ -86,11 +97,19 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			}
 		}
 		if (!i.m_eaten) {
-			if (m_fish.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
-				i.m_eaten = true;
-				Print << U"umai";
-				//経験値を増加させる。
-				m_EXP+=10;
+			if ((m_levelIcon.getLevel() < 2 and m_blueFish.isCollision(i.m_esaesa))
+				or (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3
+					and m_whiteFish.isCollision(i.m_esaesa))
+				or (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4
+					and m_tatsu.isCollision(i.m_esaesa))
+				or (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5
+					and m_turtle.isCollision(i.m_esaesa))
+				or (5 <= m_levelIcon.getLevel() and m_jerryFish.isCollision(i.m_esaesa)))
+			{//&&fish1の満腹度が最大ではない
+					i.m_eaten = true;
+					Print << U"umai";
+					//経験値を増加させる。
+					m_EXP += 10;
 			}
 		}
 		else { i.m_eaten = false; }//冗長に思えるかもしれないけど必要です。
@@ -101,6 +120,15 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		m_levelIcon.levelUp();
 		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);
 		//Print << (m_levelIcon.getLevel() * 0.8) * m_maxEXP;
+
+		if (m_levelIcon.getLevel() == 2)
+			m_whiteFish.move(m_blueFish.getPoint());
+		else if (m_levelIcon.getLevel() == 3)
+			m_tatsu.move(m_whiteFish.getPoint());
+		else if (m_levelIcon.getLevel() == 4)
+			m_turtle.move(m_tatsu.getPoint());
+		else if (m_levelIcon.getLevel() == 5)
+			m_jerryFish.move(m_turtle.getPoint());
 	}
 	m_expBar.setHP(m_EXP);
 	
@@ -112,7 +140,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	//ごみの数によってダメージ
 	m_hpBar.damage(garbage_in_aq);
 
-	m_resultView.update(m_level, m_blueFishTex);
+	m_resultView.update(m_levelIcon.getLevel(), m_blueFishTex);
 
 	if (MouseR.down()) {
 		m_isResult = true;
@@ -141,7 +169,17 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 		}
 	}
 
-	m_fish.draw();
+	if (m_levelIcon.getLevel() < 2)
+		m_blueFish.draw();
+	else if (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3)
+		m_whiteFish.draw();
+	else if (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4)
+		m_tatsu.draw();
+	else if (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5)
+		m_turtle.draw();
+	else if (5 <= m_levelIcon.getLevel())
+		m_jerryFish.draw();
+
 	for (auto& i : m_arrayFood) {
 		i.draw();
 	}
@@ -151,7 +189,7 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 		m_resultView.draw();
 	}
 	// エフェクトを追加する
-	effect.add<RingEffect>(Cursor::Pos());
+	//effect.add<RingEffect>(Cursor::Pos());
 
 	//エフェクトの更新
 	effect.update();
