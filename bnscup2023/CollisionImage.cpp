@@ -29,5 +29,6 @@ bool CollisionImage::isCollision(const CollisionImage& ci) const
 void CollisionImage::move(Vec2 v)
 {
 	m_point = v;
+	m_circleCenter = v;
 }
 
