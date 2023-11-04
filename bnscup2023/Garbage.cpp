@@ -66,7 +66,7 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 	{
 		int32 place = Random(3);
 		Vec2 pos = (point + rect.pos);
-		Garbage gab(size, tex, time, place);
+		Garbage gab(size, tex, Garbage::time, place);
 		if (clip && (not rect.contains(pos)))
 		{
 			continue;
@@ -74,12 +74,12 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 		gab.putpoints(pos);
 		garbage << gab;
 		if (count % 10 == 0) {
-			coolTime -= 0.5;
+			Garbage::coolTime -= 0.5;
 		}
-		if (coolTime <= 1.5) {
-			coolTime = 1.5;
+		if (Garbage::coolTime <= 1.5) {
+			Garbage::coolTime = 1.5;
 		}
-		time += coolTime;
+		Garbage::time += Garbage::coolTime;
 		count += 1;
 	}
 

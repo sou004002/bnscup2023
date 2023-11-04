@@ -18,6 +18,7 @@ public:
 	void retry();
 
 private:
+	
 	const Texture m_backGround = Texture(U"dotImages/bg.svg");
 	const int32 m_aqua_frameThick = 5;
 	const int32 m_aqua_w = Scene::Width() - m_aqua_frameThick * 2;

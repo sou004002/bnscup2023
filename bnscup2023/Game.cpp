@@ -3,18 +3,20 @@
 Game::Game(const InitData& init)
 	:IScene{ init }
 {
-
-
+	Garbage::coolTime = 3.0;
+	Garbage::time = 0;
+	/*Print << U"con";*/
 }
 
 void Game::update()//値の更新を行う。drawしても描画されない
 {
-	//Cursor::RequestStyle(CursorStyle::Hidden);
+	Cursor::RequestStyle(CursorStyle::Hidden);
 	//リザルトフラグが経っていたら
 	if (m_isResult) {
 		m_resultView.update(m_level, m_blueFishTex);//リザルトビューの更新
 		if (m_resultView.getTitlePressed()) {
 			changeScene(State::Title);
+
 		}
 		if (m_resultView.getRetryPressed()) {
 			retry();
@@ -23,6 +25,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	}
 
 	ClearPrint();
+	Print << U"time",Garbage::time;
 	m_accumulator += Scene::DeltaTime();
 	m_foodBtn.update();
 
@@ -118,7 +121,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		if (!i.m_eaten) {
 			if (m_fish.isCollision(i.m_esaesa)) {//&&fish1の満腹度が最大ではない
 				i.m_eaten = true;
-				Print << U"umai";
+				/*Print << U"umai";*/
 				//経験値を増加させる。
 				m_EXP+=10;
 			}
@@ -165,12 +168,12 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	m_levelIcon.draw();
 	m_foodBtn.draw();
 
-	m_cursor.draw();
+
 	for (auto& gab : m_garbages)
 	{
 		if (gab.gethitter()) {
+			/*Print << gab.get_time();*/
 			gab.draw(gab.getcircle().mouseOver() && !m_foodBtn.getPressed());
-			//Print << gab.get_time();
 		}
 	}
 	for (auto& gab : m_garbageFromFood)
@@ -189,6 +192,9 @@ void Game::draw() const //描画を行う。const関数のみ呼べる
 	if (m_foodBtn.getRect().mouseOver())
 	{
 		TextureAsset(U"finger").resized(60).draw(Cursor::Pos().x - 20, Cursor::Pos().y - 5);
+	}
+	else {
+		m_cursor.draw();
 	}
 	if (m_isResult) {
 		m_resultView.draw();
@@ -212,4 +218,6 @@ void Game::retry()
 	m_charaName = U"blueFish";
 	m_isResult = false;
 	changeScene(State::Game);
+
+	m_accumulator = 0;
 }
