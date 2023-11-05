@@ -19,6 +19,13 @@ escキー：終了<br>
 # 起動方法
 「餌をやる。そしてごみをすくう。」フォルダを解凍し、exeファイルを実行してください。<br>
 
+# 仕様素材
+・SE：魔王魂、効果音ラボ
+・BGM：https://hashimamiweb.com/freebgm-lir/
+・画像素材：https://pixel-duarte.itch.io
+・フォント：https://fontmeme.com/jfont/invasion-2000-font/
+　　　　　　https://fontmeme.com/jfont/misaki-font/
+      
 
 # お問い合わせ
 * 作成者　Sou、なぎゃやま、takeuchi、nutunuti<br>
