@@ -115,11 +115,24 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aquarium.cpp" />
+    <ClCompile Include="CollisionImage.cpp" />
+    <ClCompile Include="Fish.cpp" />
+    <ClCompile Include="FoodBtn.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Garbage.cpp" />
+    <ClCompile Include="Food.cpp" />
+    <ClCompile Include="HPBar.cpp" />
+    <ClCompile Include="JerryFish.cpp" />
+    <ClCompile Include="LvIcon.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mousecursor.cpp" />
+    <ClCompile Include="resultView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\engine\texture\box-shadow\128.png" />
@@ -315,7 +328,21 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aquarium.hpp" />
+    <ClInclude Include="CollisionImage.hpp" />
+    <ClInclude Include="Common.hpp" />
+    <ClInclude Include="Food.h" />
+    <ClInclude Include="FoodBtn.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="HPBar.hpp" />
+    <ClInclude Include="JerryFish.hpp" />
+    <ClInclude Include="LvIcon.hpp" />
+    <ClInclude Include="Mousecursor.h" />
+    <ClInclude Include="Fish.hpp" />
+    <ClInclude Include="Garbage.hpp" />
+    <ClInclude Include="resultView.hpp" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Title.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App\example\obj\blacksmith.obj">
