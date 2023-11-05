@@ -20,11 +20,11 @@ escキー：終了<br>
 「餌をやる。そしてごみをすくう。」フォルダを解凍し、exeファイルを実行してください。<br>
 
 # 仕様素材
-・SE：魔王魂、効果音ラボ
-・BGM：https://hashimamiweb.com/freebgm-lir/
-・画像素材：https://pixel-duarte.itch.io
-・フォント：https://fontmeme.com/jfont/invasion-2000-font/
-　　　　　　https://fontmeme.com/jfont/misaki-font/
+・SE：魔王魂、効果音ラボ<br>
+・BGM：https://hashimamiweb.com/freebgm-lir/<br>
+・画像素材：https://pixel-duarte.itch.io<br>
+・フォント：https://fontmeme.com/jfont/invasion-2000-font/<br>
+　　　　　　https://fontmeme.com/jfont/misaki-font/<br>
       
 
 # お問い合わせ
