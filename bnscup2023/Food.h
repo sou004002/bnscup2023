@@ -7,7 +7,7 @@ class Food {
 public:
 	Food(float x, Vec2 aqua, int32 w, int32 h, Aquarium aq)
 		:m_x(x), m_y(120),
-		m_esaesa((int32)m_x, (int32)m_y, 5, TextureAsset(U"food"), aq),
+		m_esaesa((int32)m_x, (int32)m_y, 10, TextureAsset(U"food"), aq),
 		m_left(aqua.x), m_right(m_left + (float)w), m_maxY(aqua.y + h), m_trashTime(0),
 		m_ground(false), m_elapsedTime(0), m_startTime(Random() * 2), m_eaten(false),m_foodCircle(m_x-5, m_y-5, 10)
 	{	//m_x = x;
@@ -37,7 +37,7 @@ public:
 	float m_right;
 	bool m_eaten;
 	double m_dx;
-	const double m_dy = 1.5;
+	const double m_dy = 2.0;
 	Circle m_foodCircle;
 	CollisionImage m_esaesa;
 };

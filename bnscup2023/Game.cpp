@@ -149,6 +149,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 		m_EXP = 0;
 		m_levelIcon.levelUp();
 		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);
+		m_hpBar.setHP(m_hpBar.getMaxHP());
 		//Print << (m_levelIcon.getLevel() * 0.8) * m_maxEXP;
 
 		if (m_levelIcon.getLevel() == 2)

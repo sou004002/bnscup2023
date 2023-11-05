@@ -8,10 +8,10 @@ class Mousecursor
 public:
 	Mousecursor(double x, double y, Texture otete, Texture ami, Texture allow, Aquarium aq)
 		:m_x(x), m_y(y), m_feed(true), m_pickGarbage(false),
-		m_otete(m_x, m_y, 50.0, otete, aq),
+		m_otete(m_x, m_y, 85.0, otete, aq),
 		m_net(m_x, m_y, 70.0, ami, aq),
 		m_allow(m_x, m_y, 60.0, allow, aq),
-		m_image(m_x, m_y, 50.0, otete, aq)
+		m_image(m_x, m_y, 85.0, otete, aq)
 	{
 		/*m_x = x;
 		m_y = y;
