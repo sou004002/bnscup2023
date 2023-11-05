@@ -76,6 +76,9 @@ private:
 	Fish m_turtle{ 200, 300, 100.0, TextureAsset(U"turtle"), 4, m_aqua };
 	JerryFish m_jerryFish{ 200, 300, 100.0, TextureAsset(U"jerryFish"), 2, m_aqua};
 
+	Texture fishTexture = m_blueFish.getTexture();
+	String fishName = U"blueFish";
+
 	//マウスカーソル
 	Mousecursor m_cursor{ 200.0, 300.0, TextureAsset(U"foodFinger"),
 		TextureAsset(U"ami"), TextureAsset(U"cursor"), m_aqua };

@@ -58,6 +58,8 @@ Circle Garbage::getcircle() const
 
 Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, double size, Texture tex,double speed,bool clip)
 {
+	Garbage::coolTime = 3.0;
+	Garbage::time = 0;
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
 	int32 count = 1;
