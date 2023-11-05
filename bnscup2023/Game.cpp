@@ -11,6 +11,8 @@ Game::Game(const InitData& init)
 void Game::update()//値の更新を行う。drawしても描画されない
 {
 	Cursor::RequestStyle(CursorStyle::Hidden);
+	AudioAsset(U"BGM").setVolume(0.1);
+	AudioAsset(U"BGM").play();
 	//リザルトフラグが経っていたら
 	if (m_isResult) {
 		//リザルトビューの更新
@@ -26,6 +28,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			m_resultView.update(m_levelIcon.getLevel(), m_jerryFish.getTexture(), U"jerryFish");
 
 		if (m_resultView.getTitlePressed()) {
+			AudioAsset(U"BGM").stop();
 			changeScene(State::Title);
 
 		}
@@ -53,6 +56,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 				{
 					if (gab.getcircle().leftClicked())
 					{
+						AudioAsset(U"garbage").playOneShot();
 						gab.set_hit(false);
 						gab.set_time(Garbage::coolTime + Garbage::time);
 						Garbage::time = Garbage::coolTime + Garbage::time;
@@ -90,6 +94,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 			{
 				if (gab.getcircle().leftClicked())
 				{
+					AudioAsset(U"garbage").playOneShot();
 					gab.set_del(true);
 				}
 			}
@@ -148,6 +153,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 					and m_turtle.isCollision(i.m_esaesa))
 				or (5 <= m_levelIcon.getLevel() and m_jerryFish.isCollision(i.m_esaesa)))
 			{//&&fish1の満腹度が最大ではない
+				AudioAsset(U"eat").playOneShot();
 					i.m_eaten = true;
 					//経験値を増加させる。
 					m_EXP += 10;
@@ -157,6 +163,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	}
 	if (m_EXP >=m_expBar.getMaxHP())
 	{
+		AudioAsset(U"levelUp").playOneShot();
 		m_EXP = 0;
 		m_levelIcon.levelUp();
 		m_expBar.setMaxHP((m_levelIcon.getLevel())*m_maxEXP*0.5);

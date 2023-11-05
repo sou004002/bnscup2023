@@ -13,8 +13,9 @@ void FoodBtn::update() {
 	const bool mouseOver = m_rect.mouseOver();
 
 
-	if (m_rect.leftClicked())
+	if (m_rect.leftClicked() || MouseR.down())
 	{
+		AudioAsset(U"foodBtn").playOneShot();
 		m_pressed = !m_pressed;
 	}
 }

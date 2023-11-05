@@ -24,6 +24,7 @@ void Title::update()
 
 	if (m_startButton.leftClicked())
 	{
+		AudioAsset(U"start").playOneShot();
 		changeScene(State::Game);
 	}
 }
