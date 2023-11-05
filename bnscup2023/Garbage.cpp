@@ -61,6 +61,8 @@ Array<Garbage> Garbage::GenerateRandomPoints(const Rect& rect, double radius, do
 	Array<Garbage> garbage;
 	PoissonDisk2D pd{ rect.size, radius };
 	int32 count = 1;
+	Garbage::time = 0;
+	Garbage::coolTime = 3.0;
 
 	for (const auto& point : pd.getPoints())
 	{
