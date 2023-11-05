@@ -13,7 +13,18 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	Cursor::RequestStyle(CursorStyle::Hidden);
 	//リザルトフラグが経っていたら
 	if (m_isResult) {
-		m_resultView.update(m_levelIcon.getLevel(), m_blueFishTex);//リザルトビューの更新
+		//リザルトビューの更新
+		if (m_levelIcon.getLevel() < 2)
+			m_resultView.update(m_levelIcon.getLevel(), m_blueFish.getTexture(), U"blueFish");
+		else if (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3)
+			m_resultView.update(m_levelIcon.getLevel(), m_whiteFish.getTexture(), U"whiteFish");
+		else if (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4)
+			m_resultView.update(m_levelIcon.getLevel(), m_tatsu.getTexture(), U"tatsu");
+		else if (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5)
+			m_resultView.update(m_levelIcon.getLevel(), m_turtle.getTexture(), U"turtle");
+		else if (5 <= m_levelIcon.getLevel())
+			m_resultView.update(m_levelIcon.getLevel(), m_jerryFish.getTexture(), U"jerryFish");
+
 		if (m_resultView.getTitlePressed()) {
 			changeScene(State::Title);
 
@@ -184,7 +195,16 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	//ごみの数によってダメージ
 	m_hpBar.damage(garbage_in_aq);
 
-	m_resultView.update(m_levelIcon.getLevel(), m_blueFishTex);
+	if (m_levelIcon.getLevel() < 2)
+		m_resultView.update(m_levelIcon.getLevel(), m_blueFish.getTexture(), U"blueFish");
+	else if (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3)
+		m_resultView.update(m_levelIcon.getLevel(), m_whiteFish.getTexture(), U"whiteFish");
+	else if (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4)
+		m_resultView.update(m_levelIcon.getLevel(), m_tatsu.getTexture(), U"tatsu");
+	else if (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5)
+		m_resultView.update(m_levelIcon.getLevel(), m_turtle.getTexture(), U"turtle");
+	else if (5 <= m_levelIcon.getLevel())
+		m_resultView.update(m_levelIcon.getLevel(), m_jerryFish.getTexture(), U"jerryFish");
 
 	if (m_hpBar.getHP() <= 0) {
 		m_isResult = true;

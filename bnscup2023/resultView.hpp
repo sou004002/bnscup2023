@@ -8,7 +8,7 @@ public:
 		:m_level(level) ,m_tex(img),m_texName(texName){};
 	Rect getRetryRect()const;
 	Rect getTitleRect()const;
-	void update(int32 level,Texture tex);
+	void update(int32 level,Texture tex, String name);
 	void draw() const;
 	bool getRetryPressed();
 	bool getTitlePressed();

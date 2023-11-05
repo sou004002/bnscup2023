@@ -29,9 +29,10 @@ void resultView::draw() const{
 	m_font(U"Title").drawAt(m_titleRect.center(), ColorF{ 1 - m_titleTransition.value() });
 }
 
-void resultView::update(int32 level,Texture tex) {
+void resultView::update(int32 level,Texture tex, String name) {
 	m_level = level;
 	m_tex = tex;
+	m_texName = name;
 	const bool MouseOver = m_retryRect.mouseOver() || m_titleRect.mouseOver();
 	//if (MouseOver)
 	//{
