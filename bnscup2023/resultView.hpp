@@ -18,8 +18,8 @@ private:
 	double m_s=0.5;
 	Texture m_tex;
 	//Rect m_retryRect{ Arg::center((int)600/ 4 + (int)Scene::Width() / 2 - m_retryRect.w / 2 , (int)Scene::Height() / 2 + 350),200,70};
-	Rect m_retryRect{ Arg::center((int)Scene::Width() / 2 -150 ,460),200,70 };
-	Rect m_titleRect{ Arg::center((int)Scene::Width() / 2 + 150 ,460),200,70 };
+	//Rect m_retryRect{ Arg::center((int)Scene::Width() / 2 - 150 ,460),200,70 };
+	//Rect m_titleRect{ Arg::center((int)Scene::Width() / 2 + 150 ,460),200,70 };
 	Font m_font{ FontMethod::MSDF, 30 ,U"example/font/INVASION2000.TTF", FontStyle::Bitmap };
 	bool m_retryPressed = false;
 	bool m_titlePressed = false;

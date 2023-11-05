@@ -193,18 +193,7 @@ void Game::update()//値の更新を行う。drawしても描画されない
 	m_garbageFromFood.remove_if([](const Garbage& garbage) { return (garbage.get_del()); });
 
 	//ごみの数によってダメージ
-	m_hpBar.damage(garbage_in_aq);
-
-	if (m_levelIcon.getLevel() < 2)
-		m_resultView.update(m_levelIcon.getLevel(), m_blueFish.getTexture(), U"blueFish");
-	else if (2 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 3)
-		m_resultView.update(m_levelIcon.getLevel(), m_whiteFish.getTexture(), U"whiteFish");
-	else if (3 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 4)
-		m_resultView.update(m_levelIcon.getLevel(), m_tatsu.getTexture(), U"tatsu");
-	else if (4 <= m_levelIcon.getLevel() and m_levelIcon.getLevel() < 5)
-		m_resultView.update(m_levelIcon.getLevel(), m_turtle.getTexture(), U"turtle");
-	else if (5 <= m_levelIcon.getLevel())
-		m_resultView.update(m_levelIcon.getLevel(), m_jerryFish.getTexture(), U"jerryFish");
+	m_hpBar.damage(garbage_in_aq*1.5);
 
 	if (m_hpBar.getHP() <= 0) {
 		m_isResult = true;

@@ -11,7 +11,7 @@ public:
 		m_otete(m_x, m_y, 85.0, otete, aq),
 		m_net(m_x, m_y, 70.0, ami, aq),
 		m_allow(m_x, m_y, 60.0, allow, aq),
-		m_image(m_x, m_y, 85.0, otete, aq)
+		m_image(m_x, m_y, 85.0, ami, aq)
 	{
 		/*m_x = x;
 		m_y = y;

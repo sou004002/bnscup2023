@@ -2,13 +2,17 @@
 #include "resultView.hpp"
 
 Rect resultView::getRetryRect() const{
-	return m_retryRect;
+	Rect retryRect{ Arg::center((int)Scene::Width() / 2 - 150 ,460),200,70 };
+	return retryRect;
 }
 Rect resultView::getTitleRect() const{
-	return m_titleRect;
+	Rect titleRect{ Arg::center((int)Scene::Width() / 2 + 150 ,460),200,70 };
+	return titleRect;
 }
 
 void resultView::draw() const{
+	Rect retryRect{ Arg::center((int)Scene::Width() / 2 - 150 ,460),200,70 };
+	Rect titleRect{ Arg::center((int)Scene::Width() / 2 + 150 ,460),200,70 };
 	const int32 frameThickness = 20;
 	Rect mainView{ Arg::center((int)Scene::Width() / 2,(int)Scene::Height() / 2),600,450 };
 	mainView.draw(ColorF{ 0.15 });
@@ -23,31 +27,33 @@ void resultView::draw() const{
 	texRect.draw(ColorF{ 1 });
 	//texRect.drawFrame(frameThickness);
 	texRect(m_tex(0,0,300,300)).draw();
-	m_retryRect.draw(ColorF{ 1.0,m_retryTransition.value() }).drawFrame(2);
-	m_font(U"Retry").drawAt(m_retryRect.center(), ColorF{ 1 - m_retryTransition.value() });
-	m_titleRect.draw(ColorF{ 1.0,m_titleTransition.value() }).drawFrame(2);
-	m_font(U"Title").drawAt(m_titleRect.center(), ColorF{ 1 - m_titleTransition.value() });
+	retryRect.draw(ColorF{ 1.0,m_retryTransition.value() }).drawFrame(2);
+	m_font(U"Retry").drawAt(retryRect.center(), ColorF{ 1 - m_retryTransition.value() });
+	titleRect.draw(ColorF{ 1.0,m_titleTransition.value() }).drawFrame(2);
+	m_font(U"Title").drawAt(titleRect.center(), ColorF{ 1 - m_titleTransition.value() });
 }
 
 void resultView::update(int32 level,Texture tex, String name) {
 	m_level = level;
 	m_tex = tex;
 	m_texName = name;
-	const bool MouseOver = m_retryRect.mouseOver() || m_titleRect.mouseOver();
+	Rect retryRect{ Arg::center((int)Scene::Width() / 2 - 150 ,460),200,70 };
+	Rect titleRect{ Arg::center((int)Scene::Width() / 2 + 150 ,460),200,70 };
+	const bool MouseOver = retryRect.mouseOver() || titleRect.mouseOver();
 	//if (MouseOver)
 	//{
 	//	TextureAsset(U"finger").draw(Cursor::Pos());
 	//}
-	if (m_retryRect.leftClicked())
+	if (retryRect.leftClicked())
 	{
 		m_retryPressed = true;
 	}
-	if (m_titleRect.leftClicked())
+	if (titleRect.leftClicked())
 	{
 		m_titlePressed = true;
 	}
-	m_retryTransition.update(m_retryRect.mouseOver());
-	m_titleTransition.update(m_titleRect.mouseOver());
+	m_retryTransition.update(retryRect.mouseOver());
+	m_titleTransition.update(titleRect.mouseOver());
 
 
 	//if (m_retryRect.mouseOver())

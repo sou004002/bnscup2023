@@ -31,14 +31,14 @@ bool JerryFish::isCollision(const CollisionImage& ci) const
 void JerryFish::draw() const
 {
 	//動く範囲がどこか表示
-	const RectF tank = m_aquarium._frame.stretched(-m_width / 4, -m_height / 2)
-		.movedBy(-m_width / 4, -m_height / 2).scaled(0.9);
-	tank.drawFrame(2, 2, Palette::Orange);
+	//const RectF tank = m_aquarium._frame.stretched(-m_width / 4, -m_height / 2)
+	//	.movedBy(-m_width / 4, -m_height / 2).scaled(0.9);
+	//tank.drawFrame(2, 2, Palette::Orange);
 
 	//　当たり判定がどこにあるか表示
-	m_circle.movedBy(m_circleCenter)
-		.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
-		.drawFrame(2, Palette::Yellow);
+	//m_circle.movedBy(m_circleCenter)
+	//	.draw(ColorF{ 1.0, 1.0, 0.0, 0.2 })
+	//	.drawFrame(2, Palette::Yellow);
 
 	const uint64 t = Time::GetMillisec();
 	const int32 x = (t / m_speed % m_animNum);

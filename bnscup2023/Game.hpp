@@ -80,7 +80,7 @@ private:
 	String fishName = U"blueFish";
 
 	//マウスカーソル
-	Mousecursor m_cursor{ 200.0, 300.0, TextureAsset(U"foodFinger"),
+	Mousecursor m_cursor{ (double)Cursor::Pos().x, (double)Cursor::Pos().y, TextureAsset(U"foodFinger"),
 		TextureAsset(U"ami"), TextureAsset(U"cursor"), m_aqua };
 	Array<Food> m_arrayFood; //Foodの配列を用意して、generateのたびに追加
 	double m_marginTime = 3.0;

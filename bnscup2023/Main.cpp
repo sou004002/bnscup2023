@@ -28,12 +28,15 @@ void Main()
 	App manager;
 	manager.add<Title>(State::Title);
 	manager.add<Game>(State::Game);
-	manager.init(State::Game);//ゲームシーンから始めたいときはこの行を有効にする
+	//manager.init(State::Game);//ゲームシーンから始めたいときはこの行を有効にする
 
 	
 
 	while (System::Update())
 	{
+		Cursor::RequestStyle(CursorStyle::Hidden);
+		Cursor::ClipToWindow(true);
+
 		if (not manager.update())
 		{
 			break;
