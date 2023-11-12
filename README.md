@@ -17,7 +17,7 @@ escキー：終了<br>
 
 
 # 起動方法
-[ポートフォリオ](https://sou004002.github.io/my-portfolio/)内のダウンロードリンクからzipをダウンロード、<br>
+[v1.0.0(Windows)](https://github.com/sou004002/bnscup2023/releases/download/v1.0.0/foodAndGabage.zip)<br>
 フォルダを解凍し、exeファイルを実行してください。
 
 # 仕様素材
